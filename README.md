@@ -4,12 +4,12 @@ A chat-app with React Native and Socket.io
 ### Dependencies
 > ### Build
 
-> ##### Client> ***`React Native`*** ***`Redux`*** ***`Firebase`*** 
+##### Client> ***`React Native`*** ***`Redux`*** ***`Firebase`*** 
 
-> ##### Server> ***`Express`*** ***`Socket.io`*** 
+##### Server> ***`Express`*** ***`Socket.io`*** 
 
 > ### Dev
 
-> ##### Client> ***`Typescript`*** 
+##### Client> ***`Typescript`*** 
 
-> ##### Server> ***`Typescript`*** 
+##### Server> ***`Typescript`*** 
