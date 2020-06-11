@@ -1,15 +1,15 @@
-# Flame
+# Message
 A chat-app with React Native and Socket.io
 
 ### Dependencies
->Build
+> ### Build
 
-#### ***`React Native`*** ***`Redux`*** ***`Firebase`*** 
+> ##### Client> ***`React Native`*** ***`Redux`*** ***`Firebase`*** 
 
-#### ***`Express`*** ***`Socket.io`*** 
+> ##### Server> ***`Express`*** ***`Socket.io`*** 
 
->Dev
+> ### Dev
 
-#### ***`Typescript`*** 
+> ##### Client> ***`Typescript`*** 
 
-#### ***`Typescript`*** 
+> ##### Server> ***`Typescript`*** 
