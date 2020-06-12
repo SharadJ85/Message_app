@@ -1,12 +1,16 @@
 import * as React from 'react';
-import {Props} from './HomeScreenTypes';
-import {Text, View} from 'react-native';
+import {AppScreenStackNavProps} from '../../../Routes/App/AppRouteTypes';
+import {View} from 'react-native';
+import HomeRoutes from '../../../Routes/Home/HomeRoute';
 
-const HomeScreen: React.FC<Props> = () => {
+const HomeScreen = ({navigation}: AppScreenStackNavProps<'Home'>) => {
+  navigation.setOptions({
+    headerShown: false,
+  });
   return (
     <>
-      <View>
-        <Text>this is Home screen</Text>
+      <View style={{flex: 1}}>
+        <HomeRoutes />
       </View>
     </>
   );
