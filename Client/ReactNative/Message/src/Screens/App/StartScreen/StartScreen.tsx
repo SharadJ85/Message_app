@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {Props} from './StartScreenTypes';
+import {AppScreenStackNavProps} from '../../../Routes/App/AppRouteTypes';
 import {Text, View} from 'react-native';
 
-const StartScreen: React.FC<Props> = () => {
+const StartScreen = ({navigation}: AppScreenStackNavProps<'Start'>) => {
+  navigation.setOptions({
+    headerShown: false,
+  });
   return (
     <>
       <View>
