@@ -10,33 +10,34 @@ const ChatsListSection = ({title, message, time, messageCount}: Props) => {
     <>
       <TouchableOpacity
         activeOpacity={0.7}
-        style={Styles.section}
         onPress={() => navigate('Chat', {title, message})}>
-        <View style={Styles.avatar}>
-          <View style={Styles.avatarCircle}>
-            <Text style={Styles.avatarCircleText}>{title[0]}</Text>
+        <View style={Styles.section}>
+          <View style={Styles.avatar}>
+            <View style={Styles.avatarCircle}>
+              <Text style={Styles.avatarCircleText}>{title[0]}</Text>
+            </View>
           </View>
-        </View>
-        <View style={Styles.details}>
-          <View style={Styles.detailsTop}>
-            <Text numberOfLines={1} style={Styles.detailsTopTitle}>
-              {title}
-            </Text>
-            <Text style={Styles.detailsTopTime}>{time}</Text>
-          </View>
-          <View style={Styles.detailsBottom}>
-            <Text numberOfLines={1} style={Styles.detailsBottomMessage}>
-              {message?.msg}
-            </Text>
-            {messageCount ? (
-              <View style={Styles.detailsBottomBadge}>
-                <Text style={Styles.detailsBottomBadgeText}>
-                  {messageCount}
-                </Text>
-              </View>
-            ) : (
-              <View style={{width: 15}} />
-            )}
+          <View style={Styles.details}>
+            <View style={Styles.detailsTop}>
+              <Text numberOfLines={1} style={Styles.detailsTopTitle}>
+                {title}
+              </Text>
+              <Text style={Styles.detailsTopTime}>{time}</Text>
+            </View>
+            <View style={Styles.detailsBottom}>
+              <Text numberOfLines={1} style={Styles.detailsBottomMessage}>
+                {message?.msg}
+              </Text>
+              {messageCount ? (
+                <View style={Styles.detailsBottomBadge}>
+                  <Text style={Styles.detailsBottomBadgeText}>
+                    {messageCount}
+                  </Text>
+                </View>
+              ) : (
+                <View style={{width: 15}} />
+              )}
+            </View>
           </View>
         </View>
       </TouchableOpacity>

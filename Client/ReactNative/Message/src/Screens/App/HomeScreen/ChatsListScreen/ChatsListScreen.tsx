@@ -26,7 +26,7 @@ const ChatsListScreen = ({
     <>
       <View style={Styles.body}>
         <ChatsListHeaderSearch />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={Styles.messagesGroupHeader}>
             <Text style={Styles.messagesGroupHeaderText}>Recent Messages</Text>
           </View>
