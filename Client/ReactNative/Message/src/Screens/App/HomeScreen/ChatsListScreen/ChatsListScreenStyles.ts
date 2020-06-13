@@ -24,6 +24,15 @@ const Styles = StyleSheet.create({
     position: 'relative',
   },
   searchBar: {},
+  messagesGroupHeader: {
+    margin: 7,
+  },
+  messagesGroupHeaderText: {
+    fontSize: 12,
+    fontFamily: 'roboto',
+    color: GlobalStyles.sectionMessage.color,
+    letterSpacing: 1,
+  },
 });
 
 export default Styles;

@@ -4,6 +4,9 @@ const colors = {
   gainsboro: '#E5E5E5',
   cornflowerBlue: '#69A3E7',
   shipCoveThirtyFivePercent: '#767CAD59',
+  black: '#000000',
+  blackFiftyPercent: '#00000080',
+  blackSixtyFivePercent: '#000000A6',
 };
 
 const GlobalStyles = {
@@ -22,6 +25,15 @@ const GlobalStyles = {
   },
   section: {
     backgroundColor: colors.white,
+  },
+  sectionTitle: {
+    color: colors.black,
+  },
+  sectionTime: {
+    color: colors.blackFiftyPercent,
+  },
+  sectionMessage: {
+    color: colors.blackSixtyFivePercent,
   },
 };
 
