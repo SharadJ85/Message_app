@@ -1,6 +1,7 @@
 import React from 'react';
-import {SafeAreaView, View, StatusBar} from 'react-native';
+import GlobalStyles from './src/Global/Styles/GlobalStyles';
 import AppRoutes from './src/Routes/App/AppRoute';
+import {SafeAreaView, View, StatusBar} from 'react-native';
 
 const App: React.FC = () => {
   return (
@@ -8,10 +9,10 @@ const App: React.FC = () => {
       <StatusBar
         barStyle='light-content'
         translucent={true}
-        backgroundColor={'#363A44'}
+        backgroundColor={GlobalStyles.statusBar.backgroundColor}
       />
       <SafeAreaView style={{flex: 1}}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, marginTop: StatusBar.currentHeight}}>
           <AppRoutes />
         </View>
       </SafeAreaView>
