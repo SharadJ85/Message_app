@@ -2,11 +2,16 @@ import * as React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Styles from './ChatsListSectionStyles';
 import {Props} from './ChatsListSectionTypes';
+import {useNavigation} from '@react-navigation/native';
 
 const ChatsListSection = ({title, message, time, messageCount}: Props) => {
+  const {navigate} = useNavigation();
   return (
     <>
-      <TouchableOpacity activeOpacity={0.7} style={Styles.section}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={Styles.section}
+        onPress={() => navigate('Chat', {title, message})}>
         <View style={Styles.avatar}>
           <View style={Styles.avatarCircle}>
             <Text style={Styles.avatarCircleText}>{title[0]}</Text>
