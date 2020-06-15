@@ -3,6 +3,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import Styles from './ChatsListSectionStyles';
 import {Props} from './ChatsListSectionTypes';
 import {useNavigation} from '@react-navigation/native';
+import Avatar from '../Avatar/Avatar';
+import Badge from '../Badge/Badge';
 
 const ChatsListSection = ({title, message, time, messageCount}: Props) => {
   const {navigate} = useNavigation();
@@ -12,28 +14,31 @@ const ChatsListSection = ({title, message, time, messageCount}: Props) => {
         activeOpacity={0.7}
         onPress={() => navigate('Chat', {title, message})}>
         <View style={Styles.section}>
+          {/* Avatar*/}
           <View style={Styles.avatar}>
-            <View style={Styles.avatarCircle}>
-              <Text style={Styles.avatarCircleText}>{title[0]}</Text>
-            </View>
+            <Avatar titleInitial={title[0]} />
           </View>
+
+          {/* section details*/}
           <View style={Styles.details}>
             <View style={Styles.detailsTop}>
+              {/* section title*/}
               <Text numberOfLines={1} style={Styles.detailsTopTitle}>
                 {title}
               </Text>
+
+              {/* section time stamp*/}
               <Text style={Styles.detailsTopTime}>{time}</Text>
             </View>
             <View style={Styles.detailsBottom}>
+              {/* latest message*/}
               <Text numberOfLines={1} style={Styles.detailsBottomMessage}>
                 {message?.msg}
               </Text>
+
+              {/* new message count*/}
               {messageCount ? (
-                <View style={Styles.detailsBottomBadge}>
-                  <Text style={Styles.detailsBottomBadgeText}>
-                    {messageCount}
-                  </Text>
-                </View>
+                <Badge count={messageCount} />
               ) : (
                 <View style={{width: 15}} />
               )}

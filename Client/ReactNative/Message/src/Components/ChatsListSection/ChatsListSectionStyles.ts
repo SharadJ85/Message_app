@@ -16,20 +16,6 @@ const Styles = StyleSheet.create({
     height: '100%',
     width: 65,
   },
-  avatarCircle: {
-    height: 40,
-    aspectRatio: 1,
-    borderRadius: 50,
-    margin: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: GlobalStyles.navHeaderStyle.backgroundColor,
-  },
-  avatarCircleText: {
-    color: GlobalStyles.navHeaderTitleStyle.color,
-    fontSize: 20,
-    fontFamily: 'roboto',
-  },
   details: {
     height: '100%',
     flex: 1,
@@ -62,20 +48,6 @@ const Styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'roboto',
     color: GlobalStyles.sectionMessage.color,
-  },
-  detailsBottomBadge: {
-    minWidth: 21,
-    borderRadius: 50,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    marginHorizontal: 10,
-    alignItems: 'center',
-    backgroundColor: GlobalStyles.navHeaderStyle.backgroundColor,
-  },
-  detailsBottomBadgeText: {
-    color: GlobalStyles.navHeaderTitleStyle.color,
-    fontSize: 12,
-    fontFamily: 'roboto',
   },
 });
 
