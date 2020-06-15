@@ -23,7 +23,9 @@ const Styles = StyleSheet.create({
     backgroundColor: GlobalStyles.body.backgroundColor,
     position: 'relative',
   },
-  searchBar: {},
+  bodyScrollView: {
+    marginVertical: 5,
+  },
   messagesGroupHeader: {
     margin: 7,
   },
