@@ -14,7 +14,6 @@ const Styles = StyleSheet.create({
   avatarCircleText: {
     color: GlobalStyles.navHeaderTitleStyle.color,
     fontSize: 20,
-    fontFamily: 'roboto',
   },
 });
 

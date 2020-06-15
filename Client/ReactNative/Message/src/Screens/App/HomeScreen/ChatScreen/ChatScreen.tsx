@@ -6,14 +6,14 @@ import Styles from './ChatScreenStyles';
 const ChatScreen = ({navigation, route}: HomeScreenStackNavProps<'Chat'>) => {
   navigation.setOptions({
     headerStyle: Styles.navHeaderStyle,
-    headerTitle: `${route?.params.title}`,
+    headerTitle: `${route?.params.recipient.userName}`,
     headerTintColor: Styles.navHeaderTitleStyle.color,
   });
   return (
     <>
       <View style={Styles.body}>
         <ScrollView>
-          <Text>{route?.params.message?.msg}</Text>
+          <Text>{route?.params.messages?.message}</Text>
         </ScrollView>
       </View>
     </>

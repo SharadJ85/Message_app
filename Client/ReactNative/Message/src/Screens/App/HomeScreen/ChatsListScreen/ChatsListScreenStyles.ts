@@ -31,7 +31,6 @@ const Styles = StyleSheet.create({
   },
   messagesGroupHeaderText: {
     fontSize: 12,
-    fontFamily: 'roboto',
     color: GlobalStyles.sectionMessage.color,
     letterSpacing: 1,
   },

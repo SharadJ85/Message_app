@@ -29,13 +29,11 @@ const Styles = StyleSheet.create({
   detailsTopTitle: {
     flex: 1,
     fontSize: 15,
-    fontFamily: 'roboto',
     color: GlobalStyles.sectionTitle.color,
   },
   detailsTopTime: {
     margin: 10,
     fontSize: 10,
-    fontFamily: 'roboto',
     color: GlobalStyles.sectionTime.color,
   },
   detailsBottom: {
@@ -46,7 +44,6 @@ const Styles = StyleSheet.create({
   detailsBottomMessage: {
     flex: 1,
     fontSize: 12,
-    fontFamily: 'roboto',
     color: GlobalStyles.sectionMessage.color,
   },
 });
