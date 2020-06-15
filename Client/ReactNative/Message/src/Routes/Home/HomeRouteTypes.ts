@@ -4,7 +4,12 @@ import {RouteProp} from '@react-navigation/native';
 export type HomeStackList = {
   ChatsList: undefined;
   Contacts: undefined;
-  Chat: undefined;
+  Chat: {
+    title: string;
+    message?: {
+      msg: string;
+    };
+  };
 };
 export interface HomeScreenStackNavProps<T extends keyof HomeStackList> {
   navigation: StackNavigationProp<HomeStackList, T>;
