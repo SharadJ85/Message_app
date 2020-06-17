@@ -1,6 +1,17 @@
-export interface Props {
-  title: string;
-  time: string;
-  message: {msg: string} | undefined;
-  messageCount?: number;
+export interface ChatsListSectionProps {
+  owner?: User;
+  recipient: User;
+  messages: ChatMessage;
+  newMessageCount?: number;
+}
+
+interface ChatMessage {
+  user?: User;
+  message: string;
+  timeStamp: string;
+}
+
+interface User {
+  userId?: string;
+  userName: string;
 }

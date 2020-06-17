@@ -1,22 +1,26 @@
 import * as React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Styles from './ChatsListSectionStyles';
-import {Props} from './ChatsListSectionTypes';
+import {ChatsListSectionProps} from './ChatsListSectionTypes';
 import {useNavigation} from '@react-navigation/native';
 import Avatar from '../Avatar/Avatar';
 import Badge from '../Badge/Badge';
 
-const ChatsListSection = ({title, message, time, messageCount}: Props) => {
+const ChatsListSection = ({
+  recipient,
+  messages,
+  newMessageCount,
+}: ChatsListSectionProps) => {
   const {navigate} = useNavigation();
   return (
     <>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigate('Chat', {title, message})}>
+        onPress={() => navigate('Chat', {recipient, messages})}>
         <View style={Styles.section}>
           {/* Avatar*/}
           <View style={Styles.avatar}>
-            <Avatar titleInitial={title[0]} />
+            <Avatar titleInitial={recipient.userName[0]} />
           </View>
 
           {/* section details*/}
@@ -24,21 +28,21 @@ const ChatsListSection = ({title, message, time, messageCount}: Props) => {
             <View style={Styles.detailsTop}>
               {/* section title*/}
               <Text numberOfLines={1} style={Styles.detailsTopTitle}>
-                {title}
+                {recipient.userName}
               </Text>
 
               {/* section time stamp*/}
-              <Text style={Styles.detailsTopTime}>{time}</Text>
+              <Text style={Styles.detailsTopTime}>{messages.timeStamp}</Text>
             </View>
             <View style={Styles.detailsBottom}>
               {/* latest message*/}
               <Text numberOfLines={1} style={Styles.detailsBottomMessage}>
-                {message?.msg}
+                {messages?.message}
               </Text>
 
               {/* new message count*/}
-              {messageCount ? (
-                <Badge count={messageCount} />
+              {newMessageCount ? (
+                <Badge count={newMessageCount} />
               ) : (
                 <View style={{width: 15}} />
               )}

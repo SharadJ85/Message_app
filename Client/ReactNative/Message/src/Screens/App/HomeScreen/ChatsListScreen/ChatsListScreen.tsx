@@ -32,111 +32,95 @@ const ChatsListScreen = ({
             <Text style={Styles.messagesGroupHeaderText}>Recent Messages</Text>
           </View>
           <ChatsListSection
-            title={'Sharad'}
-            time={'45 mins ago'}
-            message={{msg: 'Sharad'}}
-            messageCount={56}
+            recipient={{userName: 'Sharad'}}
+            messages={{message: 'Sharad', timeStamp: '45 mins ago'}}
+            newMessageCount={56}
           />
           <ChatsListSection
-            title={'P.C.C of Engineering, Verna-Goa'}
-            message={{
-              msg:
+            recipient={{userName: 'P.C.C of Engineering, Verna-Goa'}}
+            messages={{
+              message:
                 'oneplus 8 and galaxy note 20 are one of the top flagships of 2020',
+              timeStamp: '11:49 PM',
             }}
-            time={'11:49 PM'}
-            messageCount={3}
+            newMessageCount={3}
           />
           <ChatsListSection
-            title={'National Institution of Mechatronics'}
-            message={{
-              msg:
+            recipient={{userName: 'National Institution of Mechatronics'}}
+            messages={{
+              message:
                 "anyone got two extra arduino's?? will return it by afternoon!",
+              timeStamp: '6:26 AM',
             }}
-            time={'6:26 AM'}
-            messageCount={6857}
+            newMessageCount={6857}
           />
           <View style={Styles.messagesGroupHeader}>
             <Text style={Styles.messagesGroupHeaderText}>All Messages</Text>
           </View>
           <ChatsListSection
-            title={'Rahul Desai'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday 4:56 pm'}
-            messageCount={1}
+            recipient={{userName: 'Rahul Desai'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday 4:56 pm'}}
+            newMessageCount={1}
           />
           <ChatsListSection
-            title={'Ramesh Suresh'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday 4:56 pm'}
-            messageCount={56}
+            recipient={{userName: 'Ramesh Suresh'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday 4:56 pm'}}
+            newMessageCount={56}
           />
           <ChatsListSection
-            title={'Shakira'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
-            messageCount={56}
+            recipient={{userName: 'Shakira'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
+            newMessageCount={56}
           />
           <ChatsListSection
-            title={'Led Zeplinn'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
-            messageCount={56}
+            recipient={{userName: 'Led Zeplinn'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
+            newMessageCount={56}
           />
           <ChatsListSection
-            title={'Rajesh Khanna'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
-            messageCount={12445615}
+            recipient={{userName: 'Rajesh Khanna'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
+            newMessageCount={12445615}
           />
           <ChatsListSection
-            title={'Karan Arjun'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'Karan Arjun'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Manohar Parrikar'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
+            recipient={{userName: 'Manohar Parrikar'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Carry Minati'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'Carry Minati'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'😁 Copper Leaf'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
+            recipient={{userName: '😁 Copper Leaf'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Dum Biryani 😍'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'Dum Biryani 😍'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'devs'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'devs'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Wafer'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
+            recipient={{userName: 'Wafer'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Swiggy'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'Swiggy'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'Taj Imperial'}
-            message={{msg: 'hey there!'}}
-            time={'yesterday'}
+            recipient={{userName: 'Taj Imperial'}}
+            messages={{message: 'hey there!', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            title={'X-Force'}
-            message={{msg: 'okay maybe.'}}
-            time={'yesterday'}
+            recipient={{userName: 'X-Force'}}
+            messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
         </ScrollView>
       </View>
