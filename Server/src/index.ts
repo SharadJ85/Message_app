@@ -1,23 +1,29 @@
 import express, { Application } from 'express';
 import { createServer } from 'http';
 import { listen, Server } from 'socket.io';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import https_localhost from 'https-localhost';
 
 /////////////////////////////////////////////////
 // set port number
 const port = 7777;
+
 // set express
 const app: Application = express();
-//const app = https_localhost();
+
 // set express server
 const server = createServer(app);
+
 // listen express server updates on socket.io
-const io: Server = listen(server);
+const io: Server = listen(server, {
+    transports: ['polling', 'websocket'],
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/client/index.html');
+});
 
 io.on('connection', (socket) => {
-    console.log('connection is made');
+    console.log('user connected');
+    socket.emit('commEvent', { data: 'connectionSuccessful' });
     socket.on('disconnect', () => {
         console.log('connection disconnected');
     });
