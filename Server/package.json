@@ -7,7 +7,7 @@
     "start": "node build/index.js",
     "watch": "nodemon src/index.ts",
     "test": "none",
-    "build": "npm run lint && tsc-p",
+    "build": "npm run lint && tsc",
     "lint": "eslint --fix --ext .ts ."
   },
   "repository": {
@@ -34,7 +34,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
-    "simple-node-logger": "^18.12.24",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   }
