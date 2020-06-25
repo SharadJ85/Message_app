@@ -3,11 +3,17 @@ import {AppScreenStackNavProps} from '../../../Routes/App/AppRouteTypes';
 import {View} from 'react-native';
 import HomeRoutes from '../../../Routes/Home/HomeRoute';
 import io from 'socket.io-client';
+import defaultSocketEventsLogs from '../../../Utils/defaultSocketEventsLogs';
 
-export const socket = io('https://192.168.1.37:7777', {
-  secure: true,
+// Ip address-----------------------------------------
+// export const socket = io('http://192.168.1.35:4444', {
+//   transports: ['websocket'],
+//   rejectUnauthorized: false,
+// });
+
+// Heroku address-----------------------------------------
+export const socket = io('https://message-app-server.herokuapp.com/', {
   transports: ['websocket'],
-  jsonp: false,
 });
 
 const HomeScreen = ({navigation}: AppScreenStackNavProps<'Home'>) => {
@@ -16,16 +22,7 @@ const HomeScreen = ({navigation}: AppScreenStackNavProps<'Home'>) => {
   });
 
   useEffect(() => {
-    socket.connect();
-    socket.on('connect', (con: any) => {
-      console.warn('SOCKET: connected to socket server', con);
-    });
-    socket.on('error', (err: any) => {
-      console.warn('SOCKET: errors ', err);
-    });
-    socket.on('connect_error', (err: any) => {
-      console.warn('SOCKET: connect_error ---> ', err);
-    });
+    defaultSocketEventsLogs();
   }, []);
 
   return (
