@@ -1,5 +1,5 @@
 # Message
-A chat-app with React Native and Socket.io
+A chat-app with React Native and Socket.io.
 
 ### Dependencies
 > ### Build
