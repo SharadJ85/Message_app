@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Styles from './ChatsListScreenStyles';
-import ChatsListHeaderSearch from '../../../../Components/ChatsListHeaderSearch/ChatsListHeaderSearch';
+//import ChatsListHeaderSearch from '../../../../Components/ChatsListHeaderSearch/ChatsListHeaderSearch';
 import ChatsListSection from '../../../../Components/ChatsListSection/ChatsListSection';
 import {HomeScreenStackNavProps} from '../../../../Routes/Home/HomeRouteTypes';
 import {Text, ScrollView, View, Image, TouchableOpacity} from 'react-native';

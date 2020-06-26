@@ -14,6 +14,23 @@ const Styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'column-reverse',
   },
+  scrollview: {
+    marginBottom: 55,
+  },
+  inputText: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    minHeight: 55,
+    width: '100%',
+    backgroundColor: '#dedede',
+    color: 'red',
+    fontSize: 20,
+    position: 'absolute',
+    bottom: 0,
+    flex: 1,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+  },
 });
 
 export default Styles;
