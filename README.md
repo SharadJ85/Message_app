@@ -5,9 +5,11 @@
 - [x] Initialise RN.
 - [x] Set basic ChatsListScreen and ChatScreen UI.
 - [x] Set Express server.
-- [ ] add Socket.io to **APP** & **SERVER** test for basic connection.
-- [ ] set Socket.io for multiple connections.
-- [ ] add nicknames to connecting user(s).
+- [x] add Socket.io to **APP** & **SERVER** test for basic connection.
+- [ ] add Redux to the **APP**.
+- [ ] complete *Start Screen* design.
+- [ ] add and implement Firebase AUTH with the **APP**
+- [ ] add firebase AUTH ID to **APP** socket header.
 - [ ] broadcast message data to all and certain selected users.
 - [ ] Final test for Socket.io functionality.
 - [ ] add Redux to the **APP**.
@@ -15,8 +17,6 @@
 - [ ] connect, test and store socket.io message data with Redis database.
 - [ ] Final test for Redis functionality.
 - [ ] Design **APP** UI.
-- [ ] add and implement Firebase AUTH with the **APP**
-- [ ] Final test Firebase AUTH
 - [ ] Resolve all **APP** and **SERVER** issues.
 - [ ] Test and Finalise.
 
