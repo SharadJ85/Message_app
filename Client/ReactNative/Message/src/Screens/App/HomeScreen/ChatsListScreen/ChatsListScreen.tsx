@@ -95,11 +95,11 @@ const ChatsListScreen = ({
             messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            recipient={{userName: '😁 Copper Leaf'}}
+            recipient={{userName: 'Copper Leaf'}}
             messages={{message: 'hey there!', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
-            recipient={{userName: 'Dum Biryani 😍'}}
+            recipient={{userName: 'Dum Biryani'}}
             messages={{message: 'okay maybe.', timeStamp: 'yesterday'}}
           />
           <ChatsListSection
