@@ -9,15 +9,15 @@
 - [x] add Redux to the **APP**.
 - [x] add Firebase to the **APP**.
 - [ ] complete *Start Screen* design.
-- [ ] Implement Firebase AUTH with the **APP**
+- [ ] Implement Firebase AUTH with the **APP**.
+- [ ] signup/login and test firebase.
+- [ ] add firebase users list to **SERVER**.
 - [ ] add firebase AUTH user data to **APP** socket header.
 - [ ] exchange messages between **APP** and **SERVER**.
 - [ ] add Redis database.
 - [ ] exchange messages with the users.
-- [ ] Final test for Socket.io functionality.
 - [ ] connect, test and store socket.io message data with Redis database.
-- [ ] Final test for Redis functionality.
-- [ ] Design **APP** UI.
+- [ ] Design other screens.
 - [ ] Resolve all **APP** and **SERVER** issues.
 - [ ] Test and Finalise.
 
