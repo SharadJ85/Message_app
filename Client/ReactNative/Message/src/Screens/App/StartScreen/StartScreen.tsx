@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {AppScreenStackNavProps} from '../../../Routes/App/AppRouteTypes';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 
 const StartScreen = ({navigation}: AppScreenStackNavProps<'Start'>) => {
   navigation.setOptions({
@@ -9,7 +9,8 @@ const StartScreen = ({navigation}: AppScreenStackNavProps<'Start'>) => {
   return (
     <>
       <View>
-        <Text>this is Start screen</Text>
+        <ScrollView></ScrollView>
+        <View></View>
       </View>
     </>
   );

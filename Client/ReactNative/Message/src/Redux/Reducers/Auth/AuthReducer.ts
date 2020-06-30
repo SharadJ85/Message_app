@@ -17,8 +17,10 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
 } from '../../Actions/AuthAction/LogOutAction';
+import {AuthState} from './AuthReducerTypes';
+import {AuthActions} from '../../Actions/AuthAction/AuthActionTypes';
 
-const initialState = {
+export const initialState: AuthState = {
   verify: {
     isVerifying: false,
     isAuthenticated: false,
@@ -55,8 +57,24 @@ const initialState = {
   },
 };
 
-const FirebaseAuthReducer = (state = initialState, action: any) => {
+const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
   switch (action.type) {
+    case VERIFY_REQUEST:
+      return {
+        ...state,
+        verify: {
+          ...state.verify,
+          isVerifying: true,
+        },
+      };
+    case VERIFY_SUCCESS:
+      return {
+        ...state,
+        verify: {
+          ...state.verify,
+          isVerifying: false,
+        },
+      };
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -80,7 +98,7 @@ const FirebaseAuthReducer = (state = initialState, action: any) => {
         },
         user: {
           ...state.user,
-          baseData: action.baseData,
+          baseData: action.payload.baseData,
         },
       };
     case LOGIN_FAILURE:
@@ -90,7 +108,7 @@ const FirebaseAuthReducer = (state = initialState, action: any) => {
           ...state.logIn,
           isLoggingIn: false,
           logInError: true,
-          errors: action.error,
+          errors: action.payload.error,
         },
       };
     case LOGOUT_REQUEST:
@@ -125,23 +143,7 @@ const FirebaseAuthReducer = (state = initialState, action: any) => {
           ...state.logOut,
           isLoggingOut: false,
           logoutError: true,
-          errors: action.error,
-        },
-      };
-    case VERIFY_REQUEST:
-      return {
-        ...state,
-        verify: {
-          ...state.verify,
-          isVerifying: true,
-        },
-      };
-    case VERIFY_SUCCESS:
-      return {
-        ...state,
-        verify: {
-          ...state.verify,
-          isVerifying: false,
+          errors: action.payload.error,
         },
       };
     case SIGNUP_REQUEST:
@@ -169,7 +171,7 @@ const FirebaseAuthReducer = (state = initialState, action: any) => {
           ...state.signUp,
           isSigningUp: false,
           signUpError: true,
-          errors: action.error,
+          errors: action.payload.error,
         },
       };
     default:
