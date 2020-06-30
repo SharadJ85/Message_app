@@ -24,6 +24,7 @@
   "homepage": "https://github.com/waferelectronics/Message_app#readme",
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-firebase/app": "^7.3.1",
     "@react-navigation/native": "^5.5.1",
     "@react-navigation/stack": "^5.5.1",
     "react": "16.11.0",
