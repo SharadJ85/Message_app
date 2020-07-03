@@ -7,6 +7,7 @@ const colors = {
   black: '#000000',
   blackFiftyPercent: '#00000080',
   blackSixtyFivePercent: '#000000A6',
+  whiteSixtyFivePercent: '#FFFFFFA6',
 };
 
 const GlobalStyles = {
@@ -34,6 +35,18 @@ const GlobalStyles = {
   },
   sectionMessage: {
     color: colors.blackSixtyFivePercent,
+  },
+  startBody: {
+    backgroundColor: colors.arsenic,
+  },
+  startSplash: {
+    backgroundColor: colors.white,
+  },
+  splashHeaderText: {
+    color: colors.whiteSixtyFivePercent,
+  },
+  splashText: {
+    color: colors.whiteSixtyFivePercent,
   },
 };
 

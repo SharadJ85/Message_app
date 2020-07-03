@@ -27,7 +27,9 @@ const AppRoutes = ({
 };
 
 const mapStateToProps = (state: AppState) => {
-  return {isAuthenticated: state.Auth.verify.isAuthenticated};
+  const {verify} = state.Auth;
+  const {isAuthenticated} = verify;
+  return {isAuthenticated: isAuthenticated};
 };
 
 export default connect(mapStateToProps)(AppRoutes);
