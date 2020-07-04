@@ -10,12 +10,15 @@ const Styles = StyleSheet.create({
   },
   Skip: {
     paddingHorizontal: 5,
-    paddingVertical: 3,
     marginHorizontal: 5,
   },
-  SkipText: {color: '#fff'},
+  SkipText: {
+    fontSize: 14,
+    color: '#fff',
+  },
   Pagination: {
     flex: 1,
+    marginVertical: 6,
     flexDirection: 'row',
   },
   PaginationIndicator: {

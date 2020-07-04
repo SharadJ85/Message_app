@@ -37,11 +37,15 @@ const PaginationAndSkip = ({
             );
           })}
         </View>
-        <TouchableOpacity
-          style={Styles.Skip}
-          onPress={() => scrollViewRef.current.scrollToEnd({animated: false})}>
-          <Text style={Styles.SkipText}>Skip</Text>
-        </TouchableOpacity>
+        {index <= 2 ? (
+          <TouchableOpacity
+            style={Styles.Skip}
+            onPress={() =>
+              scrollViewRef.current.scrollToEnd({animated: false})
+            }>
+            <Text style={Styles.SkipText}>Skip</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     </>
   );

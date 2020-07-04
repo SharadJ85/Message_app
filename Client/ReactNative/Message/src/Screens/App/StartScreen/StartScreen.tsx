@@ -14,7 +14,7 @@ import {
 import Styles from './StartScreenStyles';
 import SplashScreen from './SplashScreen/SplashScreen';
 import IntroScreen from './IntroScreen/IntroScreen';
-import LoginScreen from './LoginScreen/LoginScreen';
+import AuthScreen from './AuthScreen/AuthScreen';
 import PaginationAndSkip from '../../../Components/PaginationAndSkip/PaginationAndSkip';
 
 const StartScreen = ({navigation}: AppScreenStackNavProps<'Start'>) => {
@@ -28,7 +28,7 @@ const StartScreen = ({navigation}: AppScreenStackNavProps<'Start'>) => {
   const screensList: React.ReactElement[] = [
     <SplashScreen key={0} />,
     <IntroScreen key={1} />,
-    <LoginScreen key={2} />,
+    <AuthScreen key={2} />,
   ];
   return (
     <>

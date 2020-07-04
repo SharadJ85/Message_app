@@ -1,7 +1,9 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import GlobalStyles from '../../../Global/Styles/GlobalStyles';
 
-const {width, height} = Dimensions.get('screen');
+const {width, height}: {width: number; height: number} = Dimensions.get(
+  'screen',
+);
 const Styles = StyleSheet.create({
   body: {
     backgroundColor: GlobalStyles.startBody.backgroundColor,
@@ -25,13 +27,13 @@ const Styles = StyleSheet.create({
     position: 'relative',
   },
   splashCurve: {
-    backgroundColor: GlobalStyles.startSplash.backgroundColor,
+    backgroundColor: GlobalStyles.startSplashCurve.backgroundColor,
     height: 500,
     width: 500,
     alignSelf: 'center',
     borderRadius: 500,
     position: 'absolute',
-    top: -height * 0.4,
+    top: -500 + height / 3,
   },
   splashData: {
     justifyContent: 'center',
@@ -56,16 +58,16 @@ const Styles = StyleSheet.create({
     marginTop: 5,
   },
   splashHeaderText: {
-    color: GlobalStyles.splashHeaderText.color,
+    color: GlobalStyles.startSplashHeaderText.color,
     fontSize: 30,
     marginHorizontal: 5,
   },
   splashText: {
-    color: GlobalStyles.splashText.color,
+    color: GlobalStyles.startSplashText.color,
     flexWrap: 'wrap',
     flexDirection: 'row',
     height: 40,
-    width: 270,
+    width: width / 1.4,
     textAlign: 'center',
     fontSize: 14,
     marginVertical: 10,

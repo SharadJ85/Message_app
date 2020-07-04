@@ -1,7 +1,9 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import GlobalStyles from '../../../../Global/Styles/GlobalStyles';
 
-const {width, height} = Dimensions.get('screen');
+const {width, height}: {width: number; height: number} = Dimensions.get(
+  'screen',
+);
 const Styles = StyleSheet.create({
   body: {
     //    backgroundColor: GlobalStyles.startBody.backgroundColor,
