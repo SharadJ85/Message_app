@@ -1,24 +1,34 @@
 import * as React from 'react';
-import Styles from './ChatsListScreenStyles';
+import Styles from './AllChatsScreenStyles';
 //import ChatsListHeaderSearch from '../../../../Components/ChatsListHeaderSearch/ChatsListHeaderSearch';
 import ChatsListSection from '../../../../Components/ChatsListSection/ChatsListSection';
 import {HomeScreenStackNavProps} from '../../../../Routes/Home/HomeRouteTypes';
-import {Text, ScrollView, View, Image, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  ScrollView,
+  View,
+  Image,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
+import {firebaseLogOut} from '../../../../Redux/Services/AuthServices/FirebaseLogOut';
+import {useDispatch} from 'react-redux';
 
-const ChatsListScreen = ({
-  navigation,
-}: HomeScreenStackNavProps<'ChatsList'>) => {
+const AllChatsScreen = ({navigation}: HomeScreenStackNavProps<'ChatsList'>) => {
+  const dispatch = useDispatch();
   navigation.setOptions({
     headerStyle: Styles.navHeaderStyle,
     headerTitle: 'Messages',
     headerTitleAlign: 'center',
     headerTitleStyle: Styles.navHeaderTitleStyle,
+    // eslint-disable-next-line react/display-name
     headerRight: () => (
       <TouchableOpacity>
         <Image
           style={Styles.navHeaderRightStyle}
           source={require('../../../../Assets/media/images/PencilVector.png')}
         />
+        <Button title={'LogOut'} onPress={() => dispatch(firebaseLogOut())} />
       </TouchableOpacity>
     ),
   });
@@ -127,4 +137,4 @@ const ChatsListScreen = ({
     </>
   );
 };
-export default ChatsListScreen;
+export default AllChatsScreen;

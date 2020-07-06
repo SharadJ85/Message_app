@@ -3,7 +3,7 @@
 
 ## ToDo
 - [x] Initialise RN.
-- [x] Set basic ChatsListScreen and ChatScreen UI.
+- [x] Set basic AllChatsScreen and ChatScreen UI.
 - [x] Set Express server.
 - [x] add Socket.io to **APP** & **SERVER** test for basic connection.
 - [x] add Redux to the **APP**.

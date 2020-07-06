@@ -1,4 +1,5 @@
 import {RequestSignUp, ReceiveSignUp, SignUpError} from './AuthActionTypes';
+import {NativeFirebaseErrorType} from '../../Reducers/Auth/AuthReducerTypes';
 
 //actions types
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
@@ -16,7 +17,7 @@ export const receiveSignUp = (): ReceiveSignUp => {
     type: SIGNUP_SUCCESS,
   };
 };
-export const signUpError = (error: any): SignUpError => {
+export const signUpError = (error: NativeFirebaseErrorType): SignUpError => {
   return {
     type: SIGNUP_FAILURE,
     payload: error,

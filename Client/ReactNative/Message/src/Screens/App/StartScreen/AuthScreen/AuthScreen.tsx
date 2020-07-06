@@ -1,15 +1,31 @@
 import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Styles from './AuthScreenStyles';
-import {Signup, Login} from './AuthScreenTypes';
+import {
+  Signup,
+  Login,
+  AuthScreenProps,
+  MapStateToPropsReturnType,
+} from './AuthScreenTypes';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ComIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {firebaseSignUp} from '../../../../Redux/Services/AuthServices/FirebaseSignUp';
+import {connect} from 'react-redux';
+import {AppState} from '../../../../Redux/Reducers';
+import {firebaseLogIn} from '../../../../Redux/Services/AuthServices/FirebaseLogIn';
+import {AppAction} from '../../../../Redux/Actions/AppActionTypes';
+import {ThunkDispatch} from 'redux-thunk';
+import {Action} from 'redux';
 
-const AuthScreen: React.FC = (): React.ReactElement => {
+const AuthScreen = ({
+  DispatchSignUp,
+  DispatchLogIn,
+  signUp,
+}: AuthScreenProps): React.ReactElement => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   // signup functions
-  const [signUpActive, setSignUpActive] = useState(false);
+  const [signUpActive, setSignUpActive] = useState<boolean>(false);
   const [signUpForm, setSignUpForm] = useState<Signup>({
     email: ``,
     password: ``,
@@ -22,13 +38,17 @@ const AuthScreen: React.FC = (): React.ReactElement => {
       signUpForm.password === ``
     ) {
       setSignUpActive(!signUpActive);
+      setSecureTextEntry(true);
     } else {
-      console.warn('Signing up');
+      if (signUpForm.repeatPassword === signUpForm.password) {
+        console.warn('Signing up');
+        DispatchSignUp(signUpForm.email, signUpForm.password);
+      } else return null;
     }
   };
 
   // login functions
-  const [logInActive, setLogInActive] = useState(false);
+  const [logInActive, setLogInActive] = useState<boolean>(false);
   const [loginForm, setLoginForm] = useState<Login>({
     email: ``,
     password: ``,
@@ -36,8 +56,10 @@ const AuthScreen: React.FC = (): React.ReactElement => {
   const handleLogIn = () => {
     if (loginForm.email === `` && loginForm.password === ``) {
       setLogInActive(!logInActive);
+      setSecureTextEntry(true);
     } else {
-      console.warn('Signing up');
+      console.warn('Logging up');
+      DispatchLogIn(loginForm.email, loginForm.password);
     }
   };
   return (
@@ -177,9 +199,7 @@ const AuthScreen: React.FC = (): React.ReactElement => {
                         />
                         {signUpForm.repeatPassword !== `` ? (
                           signUpForm.repeatPassword === signUpForm.password ? (
-                            <TouchableOpacity
-                              onPressOut={() => setSecureTextEntry(false)}
-                              style={{padding: 3}}>
+                            <View style={{padding: 3}}>
                               <Icon
                                 name={'check'}
                                 size={20}
@@ -187,11 +207,9 @@ const AuthScreen: React.FC = (): React.ReactElement => {
                                   Styles.buttonCardSectionInputIconCheck.color
                                 }
                               />
-                            </TouchableOpacity>
+                            </View>
                           ) : (
-                            <TouchableOpacity
-                              onPressOut={() => setSecureTextEntry(true)}
-                              style={{padding: 3}}>
+                            <View style={{padding: 3}}>
                               <Icon
                                 name={'clear'}
                                 size={20}
@@ -199,7 +217,7 @@ const AuthScreen: React.FC = (): React.ReactElement => {
                                   Styles.buttonCardSectionInputIconUncheck.color
                                 }
                               />
-                            </TouchableOpacity>
+                            </View>
                           )
                         ) : null}
                       </View>
@@ -318,4 +336,22 @@ const AuthScreen: React.FC = (): React.ReactElement => {
   );
 };
 
-export default AuthScreen;
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<AppState, void, Action<AppAction>>,
+) => {
+  return {
+    DispatchSignUp: (email: string, password: string): void =>
+      dispatch(firebaseSignUp(email, password)),
+    DispatchLogIn: (email: string, password: string): void =>
+      dispatch(firebaseLogIn(email, password)),
+  };
+};
+const mapStateToProps = (state: AppState): MapStateToPropsReturnType => {
+  return {
+    signUp: state.Auth.signUp,
+  };
+};
+
+export const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(AuthScreen);

@@ -1,16 +1,6 @@
-import React, {MutableRefObject, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {AppScreenStackNavProps} from '../../../Routes/App/AppRouteTypes';
-import {
-  Animated,
-  ScrollView,
-  View,
-  Dimensions,
-  Text,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedbackComponent,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Animated, View, Dimensions, Text, Image} from 'react-native';
 import Styles from './StartScreenStyles';
 import SplashScreen from './SplashScreen/SplashScreen';
 import IntroScreen from './IntroScreen/IntroScreen';

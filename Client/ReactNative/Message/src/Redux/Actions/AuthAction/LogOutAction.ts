@@ -1,6 +1,7 @@
-//actions types
 import {RequestLogOut, ReceiveLogOut, LogOutError} from './AuthActionTypes';
+import {NativeFirebaseErrorType} from '../../Reducers/Auth/AuthReducerTypes';
 
+//actions types
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
@@ -18,7 +19,7 @@ export const receiveLogOut = (): ReceiveLogOut => {
   };
 };
 
-export const logOutError = (error: any): LogOutError => {
+export const logOutError = (error: NativeFirebaseErrorType): LogOutError => {
   return {
     type: LOGOUT_FAILURE,
     payload: error,

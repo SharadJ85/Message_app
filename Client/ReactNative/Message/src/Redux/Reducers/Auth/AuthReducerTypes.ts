@@ -1,3 +1,9 @@
+import {ReactNativeFirebase} from '@react-native-firebase/app';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+
+export type NativeFirebaseErrorType = ReactNativeFirebase.NativeFirebaseError;
+export type FirebaseAuthUserType = FirebaseAuthTypes.User;
+
 export interface Verify {
   isVerifying: boolean;
   isAuthenticated: boolean;
@@ -6,45 +12,30 @@ export interface Verify {
 export interface LogIn {
   isLoggingIn: boolean;
   logInError: boolean;
-  errors: {code: string; msg: string} | object;
-}
-
-export interface ResetPassword {
-  isResettingPassword: boolean;
-  resetPasswordError: boolean;
-  resetPasswordSuccess: boolean;
-  errors: object;
+  error: NativeFirebaseErrorType | {};
 }
 
 export interface LogOut {
   isLoggingOut: boolean;
   logOutError: boolean;
-  errors: object;
+  error: NativeFirebaseErrorType | {};
 }
 
 export interface SignUp {
   isSigningUp: boolean;
   signUpError: boolean;
-  errors: object;
-}
-
-export interface RequestUserData {
-  isRequestUserData: boolean;
-  requestUserDataError: boolean;
-  errors: object;
+  error: NativeFirebaseErrorType | {};
 }
 
 export interface User {
-  baseData: object;
-  storeData: object;
+  firebaseData: FirebaseAuthUserType | {};
+  firestoreData: object;
 }
 
 export interface AuthState {
   verify: Verify;
   logIn: LogIn;
-  resetPassword: ResetPassword;
   logOut: LogOut;
   signUp: SignUp;
-  requestUserData: RequestUserData;
   user: User;
 }

@@ -4,14 +4,14 @@ import {HomeStackList, Props} from './HomeRouteTypes';
 import {createStackNavigator} from '@react-navigation/stack';
 import ChatScreen from '../../Screens/App/HomeScreen/ChatScreen/ChatScreen';
 import ContactsScreen from '../../Screens/App/HomeScreen/ContactsScreen/ContactsScreen';
-import ChatsListScreen from '../../Screens/App/HomeScreen/ChatsListScreen/ChatsListScreen';
+import AllChatsScreen from '../../Screens/App/HomeScreen/ChatsListScreen/AllChatsScreen';
 
 const HomeStack = createStackNavigator<HomeStackList>();
 
 const HomeRoutes: React.FC<Props> = () => {
   return (
     <HomeStack.Navigator initialRouteName='ChatsList'>
-      <HomeStack.Screen name='ChatsList' component={ChatsListScreen} />
+      <HomeStack.Screen name='ChatsList' component={AllChatsScreen} />
       <HomeStack.Screen name='Contacts' component={ContactsScreen} />
       <HomeStack.Screen name='Chat' component={ChatScreen} />
     </HomeStack.Navigator>

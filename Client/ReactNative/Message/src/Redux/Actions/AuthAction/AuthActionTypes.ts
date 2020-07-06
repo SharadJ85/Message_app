@@ -2,6 +2,8 @@ import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} from './LogInAction';
 import {LOGOUT_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS} from './LogOutAction';
 import {SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS} from './SignUpAction';
 import {VERIFY_REQUEST, VERIFY_SUCCESS} from './VerifyAction';
+import {NativeFirebaseErrorType} from '../../Reducers/Auth/AuthReducerTypes';
+import {FirebaseAuthUserType} from '../../Reducers/Auth/AuthReducerTypes';
 
 // LogIn Actions
 export interface RequestLogIn {
@@ -10,12 +12,14 @@ export interface RequestLogIn {
 
 export interface ReceiveLogIn {
   type: typeof LOGIN_SUCCESS;
-  payload: {baseData: string};
+  payload: {
+    firebaseData: FirebaseAuthUserType;
+  };
 }
 
 export interface LogInError {
   type: typeof LOGIN_FAILURE;
-  payload: {error: string};
+  payload: NativeFirebaseErrorType;
 }
 
 export type LogInActions = RequestLogIn | ReceiveLogIn | LogInError;
@@ -31,7 +35,7 @@ export interface ReceiveLogOut {
 
 export interface LogOutError {
   type: typeof LOGOUT_FAILURE;
-  payload: {error: string};
+  payload: NativeFirebaseErrorType;
 }
 
 export type LogOutActions = RequestLogOut | ReceiveLogOut | LogOutError;
@@ -47,7 +51,7 @@ export interface ReceiveSignUp {
 
 export interface SignUpError {
   type: typeof SIGNUP_FAILURE;
-  payload: {error: string};
+  payload: NativeFirebaseErrorType;
 }
 
 export type SignUpActions = RequestSignUp | ReceiveSignUp | SignUpError;

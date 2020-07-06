@@ -28,36 +28,28 @@ export const initialState: AuthState = {
   logIn: {
     isLoggingIn: false,
     logInError: false,
-    errors: {},
-  },
-  resetPassword: {
-    isResettingPassword: false,
-    resetPasswordError: false,
-    resetPasswordSuccess: false,
-    errors: {},
+    error: {},
   },
   logOut: {
     isLoggingOut: false,
     logOutError: false,
-    errors: {},
+    error: {},
   },
   signUp: {
     isSigningUp: false,
     signUpError: false,
-    errors: {},
-  },
-  requestUserData: {
-    isRequestUserData: false,
-    requestUserDataError: false,
-    errors: {},
+    error: {},
   },
   user: {
-    baseData: {},
-    storeData: {},
+    firebaseData: {},
+    firestoreData: {},
   },
 };
 
-const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
+const FirebaseAuthReducer = (
+  state = initialState,
+  action: AuthActions,
+): AuthState => {
   switch (action.type) {
     case VERIFY_REQUEST:
       return {
@@ -82,7 +74,7 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
           ...state.logIn,
           isLoggingIn: true,
           logInError: false,
-          errors: {},
+          error: {},
         },
       };
     case LOGIN_SUCCESS:
@@ -98,7 +90,7 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
         },
         user: {
           ...state.user,
-          baseData: action.payload.baseData,
+          firebaseData: action.payload.firebaseData,
         },
       };
     case LOGIN_FAILURE:
@@ -108,7 +100,7 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
           ...state.logIn,
           isLoggingIn: false,
           logInError: true,
-          errors: action.payload.error,
+          error: action.payload.code,
         },
       };
     case LOGOUT_REQUEST:
@@ -116,8 +108,8 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
         ...state,
         logOut: {
           isLoggingOut: true,
-          logoutError: false,
-          errors: {},
+          logOutError: false,
+          error: {},
         },
       };
     case LOGOUT_SUCCESS:
@@ -132,8 +124,8 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
           isLoggingOut: false,
         },
         user: {
-          baseData: {},
-          storeData: {},
+          firebaseData: {},
+          firestoreData: {},
         },
       };
     case LOGOUT_FAILURE:
@@ -142,8 +134,8 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
         logOut: {
           ...state.logOut,
           isLoggingOut: false,
-          logoutError: true,
-          errors: action.payload.error,
+          logOutError: true,
+          error: action.payload.code,
         },
       };
     case SIGNUP_REQUEST:
@@ -153,7 +145,7 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
           ...state.signUp,
           isSigningUp: true,
           signUpError: false,
-          errors: {},
+          error: {},
         },
       };
     case SIGNUP_SUCCESS:
@@ -171,7 +163,7 @@ const FirebaseAuthReducer = (state = initialState, action: AuthActions) => {
           ...state.signUp,
           isSigningUp: false,
           signUpError: true,
-          errors: action.payload.error,
+          error: action.payload.code,
         },
       };
     default:
