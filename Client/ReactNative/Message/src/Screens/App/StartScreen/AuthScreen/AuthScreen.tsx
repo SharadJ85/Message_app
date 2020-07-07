@@ -1,9 +1,16 @@
-import React, {useState} from 'react';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ToastAndroid,
+} from 'react-native';
 import Styles from './AuthScreenStyles';
 import {
-  Signup,
-  Login,
+  SignupStateType,
+  LoginStateType,
   AuthScreenProps,
   MapStateToPropsReturnType,
 } from './AuthScreenTypes';
@@ -20,13 +27,14 @@ import {Action} from 'redux';
 const AuthScreen = ({
   DispatchSignUp,
   DispatchLogIn,
-  signUp,
+  signUpError,
+  logInError,
 }: AuthScreenProps): React.ReactElement => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   // signup functions
   const [signUpActive, setSignUpActive] = useState<boolean>(false);
-  const [signUpForm, setSignUpForm] = useState<Signup>({
+  const [signUpForm, setSignUpForm] = useState<SignupStateType>({
     email: ``,
     password: ``,
     repeatPassword: ``,
@@ -46,10 +54,15 @@ const AuthScreen = ({
       } else return null;
     }
   };
+  const signUpErrorToast = () => {
+    if (signUpError) {
+      // console.warn('signUpErrorToast', signUpError);
+    }
+  };
 
   // login functions
   const [logInActive, setLogInActive] = useState<boolean>(false);
-  const [loginForm, setLoginForm] = useState<Login>({
+  const [loginForm, setLoginForm] = useState<LoginStateType>({
     email: ``,
     password: ``,
   });
@@ -62,6 +75,17 @@ const AuthScreen = ({
       DispatchLogIn(loginForm.email, loginForm.password);
     }
   };
+  const logInErrorToast = () => {
+    if (logInError) {
+      // ToastNotification(logInError);
+      // console.warn('logInErrorToast', logInError);
+    }
+  };
+
+  useEffect(() => {
+    signUpErrorToast();
+    logInErrorToast();
+  }, []);
   return (
     <>
       <View style={Styles.body}>
@@ -348,7 +372,8 @@ const mapDispatchToProps = (
 };
 const mapStateToProps = (state: AppState): MapStateToPropsReturnType => {
   return {
-    signUp: state.Auth.signUp,
+    signUpError: state.Auth.signUp.error,
+    logInError: state.Auth.logIn.error,
   };
 };
 

@@ -27,7 +27,7 @@ export const receiveLogin = (
   };
 };
 
-export const loginError = (error: NativeFirebaseErrorType): LogInError => {
+export const loginError = (error: NativeFirebaseErrorType | {}): LogInError => {
   return {
     type: LOGIN_FAILURE,
     payload: error,

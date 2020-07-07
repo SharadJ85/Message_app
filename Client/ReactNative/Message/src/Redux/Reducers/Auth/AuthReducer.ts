@@ -100,7 +100,7 @@ const FirebaseAuthReducer = (
           ...state.logIn,
           isLoggingIn: false,
           logInError: true,
-          error: action.payload.code,
+          error: action.payload,
         },
       };
     case LOGOUT_REQUEST:
@@ -135,7 +135,7 @@ const FirebaseAuthReducer = (
           ...state.logOut,
           isLoggingOut: false,
           logOutError: true,
-          error: action.payload.code,
+          error: action.payload,
         },
       };
     case SIGNUP_REQUEST:
@@ -163,7 +163,7 @@ const FirebaseAuthReducer = (
           ...state.signUp,
           isSigningUp: false,
           signUpError: true,
-          error: action.payload.code,
+          error: action.payload,
         },
       };
     default:

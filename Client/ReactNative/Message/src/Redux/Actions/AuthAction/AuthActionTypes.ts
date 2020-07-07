@@ -19,7 +19,7 @@ export interface ReceiveLogIn {
 
 export interface LogInError {
   type: typeof LOGIN_FAILURE;
-  payload: NativeFirebaseErrorType;
+  payload: NativeFirebaseErrorType | {};
 }
 
 export type LogInActions = RequestLogIn | ReceiveLogIn | LogInError;
@@ -35,7 +35,7 @@ export interface ReceiveLogOut {
 
 export interface LogOutError {
   type: typeof LOGOUT_FAILURE;
-  payload: NativeFirebaseErrorType;
+  payload: NativeFirebaseErrorType | {};
 }
 
 export type LogOutActions = RequestLogOut | ReceiveLogOut | LogOutError;
@@ -51,7 +51,7 @@ export interface ReceiveSignUp {
 
 export interface SignUpError {
   type: typeof SIGNUP_FAILURE;
-  payload: NativeFirebaseErrorType;
+  payload: NativeFirebaseErrorType | {};
 }
 
 export type SignUpActions = RequestSignUp | ReceiveSignUp | SignUpError;

@@ -11,7 +11,7 @@ const colors = {
   blackFifty: '#00000080',
   blackSixtyFive: '#000000A6',
   cornflowerBlue: '#69A3E7',
-  japaneseLaurel: '#0A6906',
+  IslamicGreen: '#109e00',
   red: '#EF0606',
 };
 
@@ -79,7 +79,7 @@ const GlobalStyles = {
     color: colors.arsenicEighty,
   },
   IconCheck: {
-    color: colors.japaneseLaurel,
+    color: colors.IslamicGreen,
   },
   IconUncheck: {
     color: colors.red,

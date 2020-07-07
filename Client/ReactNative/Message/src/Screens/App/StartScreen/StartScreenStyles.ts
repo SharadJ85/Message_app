@@ -1,9 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import GlobalStyles from '../../../Global/Styles/GlobalStyles';
 
-const {width, height}: {width: number; height: number} = Dimensions.get(
-  'screen',
-);
+const {width, height} = Dimensions.get('screen');
 const Styles = StyleSheet.create({
   body: {
     backgroundColor: GlobalStyles.startBody.backgroundColor,
@@ -33,7 +31,7 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 500,
     position: 'absolute',
-    top: -500 + height / 3,
+    top: -500,
   },
   splashData: {
     justifyContent: 'center',

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {HomeStackList, Props} from './HomeRouteTypes';
+import {HomeStackList} from './HomeRouteTypes';
 import {createStackNavigator} from '@react-navigation/stack';
 import ChatScreen from '../../Screens/App/HomeScreen/ChatScreen/ChatScreen';
 import ContactsScreen from '../../Screens/App/HomeScreen/ContactsScreen/ContactsScreen';
@@ -8,7 +8,7 @@ import AllChatsScreen from '../../Screens/App/HomeScreen/ChatsListScreen/AllChat
 
 const HomeStack = createStackNavigator<HomeStackList>();
 
-const HomeRoutes: React.FC<Props> = () => {
+const HomeRoutes: React.FC = () => {
   return (
     <HomeStack.Navigator initialRouteName='ChatsList'>
       <HomeStack.Screen name='ChatsList' component={AllChatsScreen} />

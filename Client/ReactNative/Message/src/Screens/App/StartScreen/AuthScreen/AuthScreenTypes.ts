@@ -1,19 +1,24 @@
 import {ConnectedProps} from 'react-redux';
 import {connector} from './AuthScreen';
-import {SignUp} from '../../../../Redux/Reducers/Auth/AuthReducerTypes';
+import {
+  LogIn,
+  NativeFirebaseErrorType,
+  SignUp,
+} from '../../../../Redux/Reducers/Auth/AuthReducerTypes';
 
-export interface Signup {
+export interface SignupStateType {
   email: string;
   password: string;
   repeatPassword: string;
 }
-export interface Login {
+export interface LoginStateType {
   email: string;
   password: string;
 }
 
 export interface MapStateToPropsReturnType {
-  signUp: SignUp;
+  signUpError: NativeFirebaseErrorType | {};
+  logInError: NativeFirebaseErrorType | {};
 }
 
 export type ReactProps = {};

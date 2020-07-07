@@ -15,7 +15,7 @@ export const firebaseLogIn = (email: string, password: string) => (
     .signInWithEmailAndPassword(email, password)
     .then((user) => {
       console.warn('Logging in');
-      dispatch(receiveLogin(user));
+      dispatch(receiveLogin(user.user));
     })
     .catch((error) => {
       console.warn('Logging error', error);
