@@ -1,15 +1,15 @@
 import {applyMiddleware, createStore} from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 import allReducers from './Reducers/index';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
-
-const sagaMiddleware = createSagaMiddleware();
+import {firebaseVerify} from './Services/AuthServices/FirebaseVerify';
 
 const myStore = () => {
   const store = createStore(
     allReducers,
-    composeWithDevTools(applyMiddleware(sagaMiddleware)),
+    composeWithDevTools(applyMiddleware(thunk)),
   );
+  store.dispatch(firebaseVerify());
   return store;
 };
 

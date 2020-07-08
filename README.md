@@ -3,14 +3,15 @@
 
 ## ToDo
 - [x] Initialise RN.
-- [x] Set basic ChatsListScreen and ChatScreen UI.
+- [x] Set basic AllChatsScreen and ChatScreen UI.
 - [x] Set Express server.
 - [x] add Socket.io to **APP** & **SERVER** test for basic connection.
 - [x] add Redux to the **APP**.
 - [x] add Firebase to the **APP**.
-- [ ] complete *Start Screen* design.
-- [ ] Implement Firebase AUTH with the **APP**.
-- [ ] signup/login and test firebase.
+- [x] complete *Start Screen* design.--(intro screen character remaining)
+- [ ] add animations to *Start Screen*.
+- [x] Implement Firebase AUTH with the **APP**.
+- [x] signup/login and test firebase.
 - [ ] add firebase users list to **SERVER**.
 - [ ] add firebase AUTH user data to **APP** socket header.
 - [ ] exchange messages between **APP** and **SERVER**.

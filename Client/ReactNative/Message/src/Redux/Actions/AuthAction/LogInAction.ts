@@ -1,23 +1,33 @@
-//actions types
+import {RequestLogIn, ReceiveLogIn, LogInError} from './AuthActionTypes';
+import {
+  NativeFirebaseErrorType,
+  FirebaseAuthUserType,
+} from '../../Reducers/Auth/AuthReducerTypes';
+
+//actions Strings
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 //main actions
-export const requestLogin = () => {
+export const requestLogin = (): RequestLogIn => {
   return {
     type: LOGIN_REQUEST,
   };
 };
 
-export const receiveLogin = (baseData: any) => {
+export const receiveLogin = (
+  firebaseData: FirebaseAuthUserType,
+): ReceiveLogIn => {
   return {
     type: LOGIN_SUCCESS,
-    payload: baseData,
+    payload: {
+      firebaseData,
+    },
   };
 };
 
-export const loginError = (error: any) => {
+export const loginError = (error: NativeFirebaseErrorType | {}): LogInError => {
   return {
     type: LOGIN_FAILURE,
     payload: error,

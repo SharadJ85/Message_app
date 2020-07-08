@@ -1,22 +1,35 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {AppStackList} from './AppRouteTypes';
+import {AppRouteProps, AppStackList} from './AppRouteTypes';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import StartScreen from '../../Screens/App/StartScreen/StartScreen';
 import HomeScreen from '../../Screens/App/HomeScreen/HomeScreen';
+import {connect} from 'react-redux';
+import {AppState} from '../../Redux/Reducers';
 
 const AppStack = createStackNavigator<AppStackList>();
 
-const AppRoutes: React.FC = () => {
+const AppRoutes = ({
+  isAuthenticated,
+}: AppRouteProps): React.ReactElement<typeof NavigationContainer> => {
   return (
     <NavigationContainer>
       <AppStack.Navigator initialRouteName='Home'>
-        <AppStack.Screen name='Start' component={StartScreen} />
-        <AppStack.Screen name='Home' component={HomeScreen} />
+        {isAuthenticated ? (
+          <AppStack.Screen name='Home' component={HomeScreen} />
+        ) : (
+          <AppStack.Screen name='Start' component={StartScreen} />
+        )}
       </AppStack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default AppRoutes;
+const mapStateToProps = (state: AppState) => {
+  const {verify} = state.Auth;
+  const {isAuthenticated} = verify;
+  return {isAuthenticated: isAuthenticated};
+};
+
+export default connect(mapStateToProps)(AppRoutes);
