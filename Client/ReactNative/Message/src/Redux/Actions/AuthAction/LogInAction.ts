@@ -16,14 +16,10 @@ export const requestLogin = (): RequestLogIn => {
   };
 };
 
-export const receiveLogin = (
-  firebaseData: FirebaseAuthUserType,
-): ReceiveLogIn => {
+export const receiveLogin = (user: FirebaseAuthUserType): ReceiveLogIn => {
   return {
     type: LOGIN_SUCCESS,
-    payload: {
-      firebaseData,
-    },
+    payload: user,
   };
 };
 

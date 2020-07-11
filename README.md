@@ -14,7 +14,7 @@
 - [x] signup/login and test firebase.
 - [ ] add firebase users list to **SERVER**.
 - [ ] add firebase AUTH user data to **APP** socket header.
-- [ ] exchange messages between **APP** and **SERVER**.
+- [x] exchange messages between **APP** and **SERVER**.
 - [ ] add Redis database.
 - [ ] exchange messages with the users.
 - [ ] connect, test and store socket.io message data with Redis database.

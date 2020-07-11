@@ -41,6 +41,7 @@ export const initialState: AuthState = {
     error: {},
   },
   user: {
+    newUser: false,
     firebaseData: {},
     firestoreData: {},
   },
@@ -90,7 +91,8 @@ const FirebaseAuthReducer = (
         },
         user: {
           ...state.user,
-          firebaseData: action.payload.firebaseData,
+          newUser: false,
+          firebaseData: action.payload,
         },
       };
     case LOGIN_FAILURE:
@@ -124,6 +126,7 @@ const FirebaseAuthReducer = (
           isLoggingOut: false,
         },
         user: {
+          newUser: false,
           firebaseData: {},
           firestoreData: {},
         },
@@ -154,6 +157,10 @@ const FirebaseAuthReducer = (
         signUp: {
           ...state.signUp,
           isSigningUp: false,
+        },
+        user: {
+          ...state.user,
+          newUser: true,
         },
       };
     case SIGNUP_FAILURE:

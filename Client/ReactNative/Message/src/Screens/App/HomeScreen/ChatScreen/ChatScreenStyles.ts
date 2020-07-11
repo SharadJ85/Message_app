@@ -16,6 +16,7 @@ const Styles = StyleSheet.create({
   },
   scrollview: {
     marginBottom: 55,
+    height: 'auto',
   },
   inputText: {
     borderColor: 'blue',

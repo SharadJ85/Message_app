@@ -4,7 +4,7 @@ import {HomeStackList} from './HomeRouteTypes';
 import {createStackNavigator} from '@react-navigation/stack';
 import ChatScreen from '../../Screens/App/HomeScreen/ChatScreen/ChatScreen';
 import ContactsScreen from '../../Screens/App/HomeScreen/ContactsScreen/ContactsScreen';
-import AllChatsScreen from '../../Screens/App/HomeScreen/ChatsListScreen/AllChatsScreen';
+import AllChatsScreen from '../../Screens/App/HomeScreen/AllChatsScreen/AllChatsScreen';
 
 const HomeStack = createStackNavigator<HomeStackList>();
 

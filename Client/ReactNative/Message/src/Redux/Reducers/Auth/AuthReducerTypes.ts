@@ -28,7 +28,8 @@ export interface SignUp {
 }
 
 export interface User {
-  firebaseData: FirebaseAuthUserType | {};
+  newUser: boolean;
+  firebaseData: FirebaseAuthUserType;
   firestoreData: object;
 }
 

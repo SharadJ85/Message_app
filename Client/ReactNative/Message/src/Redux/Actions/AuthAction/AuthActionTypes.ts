@@ -12,9 +12,7 @@ export interface RequestLogIn {
 
 export interface ReceiveLogIn {
   type: typeof LOGIN_SUCCESS;
-  payload: {
-    firebaseData: FirebaseAuthUserType;
-  };
+  payload: FirebaseAuthUserType;
 }
 
 export interface LogInError {
