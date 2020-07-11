@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import { createServer } from 'http';
 import { listen, Server } from 'socket.io';
-import { fromAppTypes } from './indexTypes';
+import { fromAppTypes, newUser } from './indexTypes';
 
 // set port number
 const port = process.env.PORT || 4444;
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/client/index.html');
 });
 
-const firebaseUserIdList: Array<string> = [];
+const firebaseUserList: Array<newUser> = [];
 
 // on connect
 io.on('connection', (socket) => {
@@ -41,15 +41,15 @@ io.on('connection', (socket) => {
     });
 
     // new firebase user
-    socket.on('initial-user-auth', (userFirebaseID: string) => {
+    socket.on('new-user', (newUser: newUser) => {
         // log firebase id
-        console.log('SERVER-LOG: initial-user-auth-firebaseID==', userFirebaseID);
+        console.log('SERVER-LOG: initial-user-auth-firebaseID==', newUser);
 
         // push to firebase userID list
-        firebaseUserIdList.push(userFirebaseID);
+        firebaseUserList.push(newUser);
 
         // firebase userID list
-        console.log('firebaseUserIdList==', firebaseUserIdList);
+        console.log('updated firebaseUserIdList==', firebaseUserList);
     });
 
     socket.on('APP:new-message', (fromApp: fromAppTypes) => {

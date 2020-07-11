@@ -18,7 +18,7 @@ export const socket = io('https://message-app-server.herokuapp.com/', {
   transportOptions: {
     polling: {
       extraHeaders: {
-        myFirebaseId: store.getState().Auth.user.firebaseData?.user?.uid,
+        myFirebaseId: store.getState().Auth.user.firebaseData.uid,
       },
     },
   },

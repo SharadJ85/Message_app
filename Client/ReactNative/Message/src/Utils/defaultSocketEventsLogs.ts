@@ -2,14 +2,16 @@ import {socket} from '../Screens/App/HomeScreen/HomeScreen';
 import store from '../Redux/store';
 
 const defaultSocketEventsLogs = () => {
-  const firebaseId = store.getState().Auth.user.firebaseData.user?.uid;
-  const newUser = store.getState().Auth.user.firebaseData?.additionalUserInfo
-    ?.isNewUser;
+  const {firebaseData} = store.getState().Auth.user;
+  const newUser = store.getState().Auth.user.newUser;
 
   socket.on('connect', () => {
     console.warn('APP-SOCKET-warn: connected to server,socID==', socket.id);
-    if (firebaseId) {
-      socket.emit('initial-user-auth', {userFirebaseID: firebaseId});
+    if (newUser) {
+      socket.emit('new-user', {
+        email: firebaseData.email,
+        uid: firebaseData.uid,
+      });
     }
     console.warn('APP-SOCKET-warn: (APP-SOCKET-emit)initial-user-auth ');
   });

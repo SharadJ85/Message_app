@@ -20,7 +20,9 @@ const ChatScreen = ({
   console.warn('firebaseId==', firebase.uid);
 
   const [currentMessage, setCurrentMessage] = useState('');
-  const [messageData, setMessageData] = useState<Array<string>>([``]);
+  const [messageData, setMessageData] = useState<{message: Array<string>}>({
+    message: [``],
+  });
   const onMessageSubmit = () => {
     if (currentMessage !== '') {
       socket.emit('APP:new-message', {
@@ -29,7 +31,9 @@ const ChatScreen = ({
         timeStamp: 'userTimeStamp',
         message: currentMessage,
       });
-      setMessageData([...messageData, `Sent: ${currentMessage}`]);
+      setMessageData({
+        message: [...messageData.message, `Sent: ${currentMessage}`],
+      });
       setCurrentMessage('');
     }
   };
@@ -45,21 +49,23 @@ const ChatScreen = ({
     socket.on('SERVER:new-message', (fromServer: FromServerTypes) => {
       //if (fromServer.From_FirebaseID === firebaseId) {
       console.warn('APP:new-message=', fromServer.message);
-      setMessageData([...messageData, `Received: ${fromServer.message}`]);
+      setMessageData({
+        message: [...messageData.message, `Received: ${fromServer.message}`],
+      });
       //}
     });
   };
 
   useEffect(() => {
     receiveMessages();
-  }, []);
+  }, [messageData.message]);
 
   return (
     <>
       <View style={Styles.body}>
         <ScrollView ref={chatScreenScrollViewRef} style={Styles.scrollview}>
           <Text>{route?.params.messages?.message}</Text>
-          {messageData.map((msg, index) => (
+          {messageData.message.map((msg, index) => (
             <Text key={index}>{msg}</Text>
           ))}
         </ScrollView>

@@ -4,3 +4,8 @@ export interface fromAppTypes {
     timeStamp: string;
     message: string;
 }
+
+export interface newUser {
+    email: string;
+    uid: string;
+}
