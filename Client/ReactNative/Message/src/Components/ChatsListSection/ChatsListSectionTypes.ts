@@ -1,7 +1,7 @@
 export interface ChatsListSectionProps {
-  owner?: User;
+  user?: User;
   recipient: User;
-  messages: ChatMessage;
+  message: ChatMessage;
   newMessageCount?: number;
 }
 
@@ -12,6 +12,6 @@ interface ChatMessage {
 }
 
 interface User {
-  userId?: string;
+  userId: string;
   userName: string;
 }

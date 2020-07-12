@@ -30,7 +30,6 @@ export interface SignUp {
 export interface User {
   newUser: boolean;
   firebaseData: FirebaseAuthUserType;
-  firestoreData: object;
 }
 
 export interface AuthState {

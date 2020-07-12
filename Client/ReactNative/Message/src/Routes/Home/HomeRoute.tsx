@@ -10,8 +10,8 @@ const HomeStack = createStackNavigator<HomeStackList>();
 
 const HomeRoutes: React.FC = () => {
   return (
-    <HomeStack.Navigator initialRouteName='ChatsList'>
-      <HomeStack.Screen name='ChatsList' component={AllChatsScreen} />
+    <HomeStack.Navigator initialRouteName='AllChatsList'>
+      <HomeStack.Screen name='AllChatsList' component={AllChatsScreen} />
       <HomeStack.Screen name='Contacts' component={ContactsScreen} />
       <HomeStack.Screen name='Chat' component={ChatScreen} />
     </HomeStack.Navigator>

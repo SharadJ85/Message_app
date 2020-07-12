@@ -8,7 +8,7 @@ import Badge from '../Badge/Badge';
 
 const ChatsListSection = ({
   recipient,
-  messages,
+  message,
   newMessageCount,
 }: ChatsListSectionProps) => {
   const {navigate} = useNavigation();
@@ -16,7 +16,7 @@ const ChatsListSection = ({
     <>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigate('Chat', {recipient, messages})}>
+        onPress={() => navigate('Chat', {recipient})}>
         <View style={Styles.section}>
           {/* Avatar*/}
           <View style={Styles.avatar}>
@@ -32,12 +32,12 @@ const ChatsListSection = ({
               </Text>
 
               {/* section time stamp*/}
-              <Text style={Styles.detailsTopTime}>{messages.timeStamp}</Text>
+              <Text style={Styles.detailsTopTime}>{message.timeStamp}</Text>
             </View>
             <View style={Styles.detailsBottom}>
               {/* latest message*/}
               <Text numberOfLines={1} style={Styles.detailsBottomMessage}>
-                {messages?.message}
+                {message.message ? message.message : null}
               </Text>
 
               {/* new message count*/}

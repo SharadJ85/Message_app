@@ -1,39 +1,54 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {HomeScreenStackNavProps} from '../../../../Routes/Home/HomeRouteTypes';
-import {MapStateToPropsReturnType, FromServerTypes} from './ChatScreenTypes';
+import {
+  MapStateToPropsReturnType,
+  MapDispatchToPropsReturnType,
+  FromServerTypes,
+  ChatScreenPropsTypes,
+} from './ChatScreenTypes';
 import {ScrollView, Text, TextInput, View} from 'react-native';
 import Styles from './ChatScreenStyles';
 import {socket} from '../HomeScreen';
 import {AppState} from '../../../../Redux/Reducers';
 import {connect} from 'react-redux';
+import {Action} from 'redux';
+import {firestoreRecipientMessages} from '../../../../Redux/Services/Database/FirestoreRecipientMessages';
+import {firestoreNewMessage} from '../../../../Redux/Services/Database/FirestoreNewMessage';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppAction} from '../../../../Redux/Actions/AppActionTypes';
 
 const ChatScreen = ({
   navigation,
   route,
-  firebase,
-}: HomeScreenStackNavProps<'Chat'> & MapStateToPropsReturnType) => {
+  DispatchNewMessage,
+  DispatchFetchRecipient,
+  ReduxStateFirebase,
+  ReduxStateRecipient,
+}: ChatScreenPropsTypes) => {
   navigation.setOptions({
     headerStyle: Styles.navHeaderStyle,
-    headerTitle: `${route?.params.recipient.userName}`,
+    headerTitle: `${route?.params.recipient?.userName}`,
     headerTintColor: Styles.navHeaderTitleStyle.color,
   });
-  console.warn('firebaseId==', firebase.uid);
+  // console.warn('firebaseId==', firebase.uid);
+  // Todo remove log
 
   const [currentMessage, setCurrentMessage] = useState('');
-  const [messageData, setMessageData] = useState<{message: Array<string>}>({
-    message: [``],
-  });
   const onMessageSubmit = () => {
+    const timestamp = 1594435500;
     if (currentMessage !== '') {
       socket.emit('APP:new-message', {
-        userFirebaseID: firebase.uid,
+        userFirebaseID: ReduxStateFirebase.uid,
         recipientFirebaseID: '123xyz',
-        timeStamp: 'userTimeStamp',
+        timeStamp: timestamp.toString(),
         message: currentMessage,
       });
-      setMessageData({
-        message: [...messageData.message, `Sent: ${currentMessage}`],
-      });
+      DispatchNewMessage(
+        ReduxStateFirebase.uid,
+        route.params.recipient.userId,
+        currentMessage,
+        timestamp,
+        'sent',
+      );
       setCurrentMessage('');
     }
   };
@@ -47,27 +62,45 @@ const ChatScreen = ({
 
   const receiveMessages = () => {
     socket.on('SERVER:new-message', (fromServer: FromServerTypes) => {
-      //if (fromServer.From_FirebaseID === firebaseId) {
-      console.warn('APP:new-message=', fromServer.message);
-      setMessageData({
-        message: [...messageData.message, `Received: ${fromServer.message}`],
-      });
-      //}
+      if (fromServer.userFirebaseID === ReduxStateFirebase.uid) {
+        DispatchNewMessage(
+          fromServer.recipientFirebaseID,
+          fromServer.userFirebaseID,
+          fromServer.message,
+          fromServer.timeStamp,
+          'received',
+        );
+      }
     });
   };
 
   useEffect(() => {
     receiveMessages();
-  }, [messageData.message]);
+    DispatchFetchRecipient(
+      ReduxStateFirebase.uid,
+      route.params.recipient.userId,
+    );
+  }, []);
 
   return (
     <>
       <View style={Styles.body}>
         <ScrollView ref={chatScreenScrollViewRef} style={Styles.scrollview}>
-          <Text>{route?.params.messages?.message}</Text>
-          {messageData.message.map((msg, index) => (
-            <Text key={index}>{msg}</Text>
-          ))}
+          {ReduxStateRecipient?.uid === route?.params.recipient.userId
+            ? ReduxStateRecipient?.messages.map((each, index) => (
+                <View key={index} style={{margin: 5}}>
+                  {each.type === 'sent' ? (
+                    <Text>
+                      [{each.timestamp._seconds}] Sent: {each.message}
+                    </Text>
+                  ) : (
+                    <Text>
+                      [{each.timestamp._seconds}] Received: {each.message}
+                    </Text>
+                  )}
+                </View>
+              ))
+            : null}
         </ScrollView>
         <TextInput
           style={Styles.inputText}
@@ -81,12 +114,29 @@ const ChatScreen = ({
   );
 };
 
-const mapStateToProps = (state: AppState): MapStateToPropsReturnType => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<AppState, void, Action<AppAction>>,
+  ownProps: ChatScreenPropsTypes,
+): MapDispatchToPropsReturnType => {
   return {
-    firebase: state.Auth.user.firebaseData,
+    DispatchFetchRecipient: (userUid, recipientUid) =>
+      dispatch(firestoreRecipientMessages(userUid, recipientUid)),
+    DispatchNewMessage: (userUid, recipientUid, message, timestamp, type) =>
+      dispatch(
+        firestoreNewMessage(userUid, recipientUid, message, timestamp, type),
+      ),
+  };
+};
+const mapStateToProps = (
+  state: AppState,
+  ownProps: ChatScreenPropsTypes,
+): MapStateToPropsReturnType => {
+  return {
+    ReduxStateFirebase: state.Auth.user.firebaseData,
+    ReduxStateRecipient: state.Firestore.recipient.recipient,
   };
 };
 
-export const connector = connect(mapStateToProps);
+export const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default connector(ChatScreen);

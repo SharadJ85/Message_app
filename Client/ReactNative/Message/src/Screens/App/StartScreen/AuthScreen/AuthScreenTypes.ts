@@ -16,9 +16,14 @@ export interface LoginStateType {
   password: string;
 }
 
+export interface MapDispatchToPropsReturnType {
+  DispatchSignUp: (email: string, password: string) => void;
+  DispatchLogIn: (email: string, password: string) => void;
+}
+
 export interface MapStateToPropsReturnType {
-  signUpError: NativeFirebaseErrorType | {};
-  logInError: NativeFirebaseErrorType | {};
+  ReduxStateSignUpError: NativeFirebaseErrorType | {};
+  ReduxStateLogInError: NativeFirebaseErrorType | {};
 }
 
 export type ReactProps = {};

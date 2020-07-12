@@ -1,25 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ToastAndroid,
-} from 'react-native';
+import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Styles from './AuthScreenStyles';
 import {
   SignupStateType,
   LoginStateType,
   AuthScreenProps,
   MapStateToPropsReturnType,
+  MapDispatchToPropsReturnType,
 } from './AuthScreenTypes';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ComIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {firebaseSignUp} from '../../../../Redux/Services/AuthServices/FirebaseSignUp';
+import {firebaseSignUp} from '../../../../Redux/Services/Auth/FirebaseSignUp';
 import {connect} from 'react-redux';
 import {AppState} from '../../../../Redux/Reducers';
-import {firebaseLogIn} from '../../../../Redux/Services/AuthServices/FirebaseLogIn';
+import {firebaseLogIn} from '../../../../Redux/Services/Auth/FirebaseLogIn';
 import {AppAction} from '../../../../Redux/Actions/AppActionTypes';
 import {ThunkDispatch} from 'redux-thunk';
 import {Action} from 'redux';
@@ -27,8 +21,8 @@ import {Action} from 'redux';
 const AuthScreen = ({
   DispatchSignUp,
   DispatchLogIn,
-  signUpError,
-  logInError,
+  ReduxStateSignUpError,
+  ReduxStateLogInError,
 }: AuthScreenProps): React.ReactElement => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -55,7 +49,7 @@ const AuthScreen = ({
     }
   };
   const signUpErrorToast = () => {
-    if (signUpError) {
+    if (ReduxStateSignUpError) {
       // console.warn('signUpErrorToast', signUpError);
     }
   };
@@ -76,7 +70,7 @@ const AuthScreen = ({
     }
   };
   const logInErrorToast = () => {
-    if (logInError) {
+    if (ReduxStateLogInError) {
       // ToastNotification(logInError);
       // console.warn('logInErrorToast', logInError);
     }
@@ -362,18 +356,18 @@ const AuthScreen = ({
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, void, Action<AppAction>>,
-) => {
+): MapDispatchToPropsReturnType => {
   return {
-    DispatchSignUp: (email: string, password: string): void =>
+    DispatchSignUp: (email, password) =>
       dispatch(firebaseSignUp(email, password)),
-    DispatchLogIn: (email: string, password: string): void =>
+    DispatchLogIn: (email, password) =>
       dispatch(firebaseLogIn(email, password)),
   };
 };
 const mapStateToProps = (state: AppState): MapStateToPropsReturnType => {
   return {
-    signUpError: state.Auth.signUp.error,
-    logInError: state.Auth.logIn.error,
+    ReduxStateSignUpError: state.Auth.signUp.error,
+    ReduxStateLogInError: state.Auth.logIn.error,
   };
 };
 

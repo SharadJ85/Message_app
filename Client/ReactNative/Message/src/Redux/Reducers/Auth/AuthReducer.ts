@@ -43,7 +43,6 @@ export const initialState: AuthState = {
   user: {
     newUser: false,
     firebaseData: {},
-    firestoreData: {},
   },
 };
 
@@ -128,7 +127,6 @@ const FirebaseAuthReducer = (
         user: {
           newUser: false,
           firebaseData: {},
-          firestoreData: {},
         },
       };
     case LOGOUT_FAILURE:
