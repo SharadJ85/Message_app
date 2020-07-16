@@ -5,8 +5,14 @@ import {
   FromServerTypes,
   ChatScreenPropsTypes,
 } from './ChatScreenTypes';
-import {ScrollView, Text, TextInput, View} from 'react-native';
 import Styles from './ChatScreenStyles';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {socket} from '../HomeScreen';
 import {AppState} from '../../../../Redux/Reducers';
 import {connect} from 'react-redux';
@@ -15,55 +21,53 @@ import {firestoreRecipientMessages} from '../../../../Redux/Services/Database/Fi
 import {firestoreNewMessage} from '../../../../Redux/Services/Database/FirestoreNewMessage';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppAction} from '../../../../Redux/Actions/AppActionTypes';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Avatar from '../../../../Components/Avatar/Avatar';
+import MessageAttachments from '../../../../Components/MessageAttachments/MessageAttachments';
 
 const ChatScreen = ({
   navigation,
   route,
-  DispatchNewMessage,
-  DispatchFetchRecipient,
-  ReduxStateFirebase,
-  ReduxStateRecipient,
+  ReduxDispatchNewMessage,
+  ReduxDispatchFetchRecipient,
+  ReduxReducerFirebase,
+  ReduxReducerRecipient,
 }: ChatScreenPropsTypes) => {
   navigation.setOptions({
     headerStyle: Styles.navHeaderStyle,
     headerTitle: `${route?.params.recipient?.userName}`,
     headerTintColor: Styles.navHeaderTitleStyle.color,
   });
-  // console.warn('firebaseId==', firebase.uid);
-  // Todo remove log
-
-  const [currentMessage, setCurrentMessage] = useState('');
+  const [showAttachments, setShowAttachments] = useState<boolean>(false);
+  const [messageSendViewHeight, setMessageSendViewHeight] = useState<number>(0);
+  const [currentMessage, setCurrentMessage] = useState<string>('');
+  const [sendMessageHeight, setSendMessageHeight] = useState<number>(0);
+  const chatScreenScrollViewRef = useRef(null);
   const onMessageSubmit = () => {
     const timestamp = 1594435500;
     if (currentMessage !== '') {
       socket.emit('APP:new-message', {
-        userFirebaseID: ReduxStateFirebase.uid,
+        userFirebaseID: ReduxReducerFirebase.uid,
         recipientFirebaseID: '123xyz',
         timeStamp: timestamp.toString(),
         message: currentMessage,
+        // message: currentMessage.replace(/\s/g, ` `),
       });
-      DispatchNewMessage(
-        ReduxStateFirebase.uid,
+      ReduxDispatchNewMessage(
+        ReduxReducerFirebase.uid,
         route.params.recipient.userId,
         currentMessage,
+        // currentMessage.replace(/\s/g, ` `),
         timestamp,
         'sent',
       );
       setCurrentMessage('');
     }
   };
-  const chatScreenScrollViewRef = useRef(null);
-  // useEffect(() => {
-  //   chatScreenScrollViewRef.snapToEnd;
-  //   if (chatScreenScrollViewRef && chatScreenScrollViewRef.current) {
-  //     chatScreenScrollViewRef.current.scrollToEnd({animated: false});
-  //   }
-  // }, [chatScreenScrollViewRef]);
-
   const receiveMessages = () => {
     socket.on('SERVER:new-message', (fromServer: FromServerTypes) => {
-      if (fromServer.userFirebaseID === ReduxStateFirebase.uid) {
-        DispatchNewMessage(
+      if (fromServer.userFirebaseID === ReduxReducerFirebase.uid) {
+        ReduxDispatchNewMessage(
           fromServer.recipientFirebaseID,
           fromServer.userFirebaseID,
           fromServer.message,
@@ -76,39 +80,111 @@ const ChatScreen = ({
 
   useEffect(() => {
     receiveMessages();
-    DispatchFetchRecipient(
-      ReduxStateFirebase.uid,
+    ReduxDispatchFetchRecipient(
+      ReduxReducerFirebase.uid,
       route.params.recipient.userId,
     );
-  }, []);
+  }, [ReduxReducerRecipient?.messages]);
 
   return (
     <>
       <View style={Styles.body}>
-        <ScrollView ref={chatScreenScrollViewRef} style={Styles.scrollview}>
-          {ReduxStateRecipient?.uid === route?.params.recipient.userId
-            ? ReduxStateRecipient?.messages.map((each, index) => (
-                <View key={index} style={{margin: 5}}>
+        <ScrollView
+          ref={chatScreenScrollViewRef}
+          onLayout={(layout) => {
+            setSendMessageHeight(layout.nativeEvent.layout.height);
+          }}
+          style={[Styles.scrollView, {marginBottom: messageSendViewHeight}]}>
+          {ReduxReducerRecipient?.uid === route?.params.recipient.userId
+            ? ReduxReducerRecipient?.messages.map((each, index) => (
+                <View key={index} style={{margin: 8}}>
                   {each.type === 'sent' ? (
-                    <Text>
-                      [{each.timestamp._seconds}] Sent: {each.message}
-                    </Text>
+                    <View>
+                      <Text style={Styles.messageTimestamp}>
+                        {each.timestamp._seconds}
+                      </Text>
+                      <View
+                        style={[
+                          Styles.messageSection,
+                          {alignSelf: 'flex-end'},
+                        ]}>
+                        <View style={Styles.messageSectionMessage}>
+                          <Text style={Styles.messageSectionMessageText}>
+                            {each.message}
+                          </Text>
+                        </View>
+                      </View>
+                      <Text style={Styles.messageDelivered}>
+                        {index % 2 === 0 ? 'Delivered' : ''}
+                      </Text>
+                    </View>
                   ) : (
-                    <Text>
-                      [{each.timestamp._seconds}] Received: {each.message}
-                    </Text>
+                    <View>
+                      <Text style={Styles.messageTimestamp}>
+                        {each.timestamp._seconds}
+                      </Text>
+                      <View
+                        style={[
+                          Styles.messageSection,
+                          {alignSelf: 'flex-start'},
+                        ]}>
+                        <Avatar
+                          titleInitial={route?.params.recipient?.userName[0]}
+                          styles={Styles.messageSectionAvatar}
+                        />
+                        <View style={Styles.messageSectionMessage}>
+                          <Text style={Styles.messageSectionMessageText}>
+                            {each.message}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
                   )}
                 </View>
               ))
             : null}
         </ScrollView>
-        <TextInput
-          style={Styles.inputText}
-          value={currentMessage}
-          clearButtonMode={'always'}
-          onChangeText={(text) => setCurrentMessage(text)}
-          onSubmitEditing={() => onMessageSubmit()}
-        />
+        <View
+          onLayout={(event) => {
+            setMessageSendViewHeight(event.nativeEvent.layout.height);
+          }}
+          style={Styles.messageSend}>
+          <View style={Styles.messageSendInput}>
+            <TouchableOpacity
+              onPressOut={() => {
+                setShowAttachments(!showAttachments);
+              }}
+              style={Styles.messageSendInputIcons}>
+              <MaterialIcon
+                name={'add'}
+                size={30}
+                color={Styles.messageSectionMessage.backgroundColor}
+              />
+            </TouchableOpacity>
+            <TextInput
+              style={Styles.messageSendInputText}
+              multiline={true}
+              placeholder={'Add text to this message'}
+              placeholderTextColor={
+                Styles.messageSendInputTextPlaceHolder.color
+              }
+              value={currentMessage}
+              clearButtonMode={'always'}
+              onChangeText={(text) => setCurrentMessage(text)}
+              onSubmitEditing={() => onMessageSubmit()}
+            />
+            <TouchableOpacity
+              onPress={() => onMessageSubmit()}
+              style={Styles.messageSendInputIcons}>
+              <MaterialIcon
+                name={'send'}
+                size={30}
+                color={Styles.messageSectionMessage.backgroundColor}
+              />
+            </TouchableOpacity>
+          </View>
+          {showAttachments ? <MessageAttachments /> : null}
+        </View>
       </View>
     </>
   );
@@ -119,9 +195,15 @@ const mapDispatchToProps = (
   ownProps: ChatScreenPropsTypes,
 ): MapDispatchToPropsReturnType => {
   return {
-    DispatchFetchRecipient: (userUid, recipientUid) =>
+    ReduxDispatchFetchRecipient: (userUid, recipientUid) =>
       dispatch(firestoreRecipientMessages(userUid, recipientUid)),
-    DispatchNewMessage: (userUid, recipientUid, message, timestamp, type) =>
+    ReduxDispatchNewMessage: (
+      userUid,
+      recipientUid,
+      message,
+      timestamp,
+      type,
+    ) =>
       dispatch(
         firestoreNewMessage(userUid, recipientUid, message, timestamp, type),
       ),
@@ -132,8 +214,8 @@ const mapStateToProps = (
   ownProps: ChatScreenPropsTypes,
 ): MapStateToPropsReturnType => {
   return {
-    ReduxStateFirebase: state.Auth.user.firebaseData,
-    ReduxStateRecipient: state.Firestore.recipient.recipient,
+    ReduxReducerFirebase: state.Auth.user.firebaseData,
+    ReduxReducerRecipient: state.Firestore.recipient.recipient,
   };
 };
 

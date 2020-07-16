@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {firebaseLogOut} from '../../../../Redux/Services/Auth/FirebaseLogOut';
 import {connect, useDispatch} from 'react-redux';
-import {Action, Dispatch} from 'redux';
+import {Action} from 'redux';
 import {firestoreAllContactsList} from '../../../../Redux/Services/Database/FirestoreAllContactsList';
 import {AppState} from '../../../../Redux/Reducers';
 import {useEffect} from 'react';
@@ -38,6 +38,7 @@ const AllChatsScreen = ({
     headerTitle: 'Messages',
     headerTitleAlign: 'center',
     headerTitleStyle: Styles.navHeaderTitleStyle,
+    // eslint-disable-next-line react/display-name
     headerRight: () => (
       <TouchableOpacity>
         <Image
@@ -117,6 +118,7 @@ const mapDispatchToProps = (
     DispatchFetchList: () => dispatch(firestoreAllContactsList(userID)),
   };
 };
+
 const mapStateToProps = (
   state: AppState,
   ownProps: AllChatsScreenPropsTypes,

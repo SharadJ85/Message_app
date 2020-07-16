@@ -19,16 +19,15 @@ const ChatsListSection = ({
         onPress={() => navigate('Chat', {recipient})}>
         <View style={Styles.section}>
           {/* Avatar*/}
-          <View style={Styles.avatar}>
-            <Avatar titleInitial={recipient.userName[0]} />
-          </View>
+          <Avatar titleInitial={recipient.userName[0]} styles={Styles.avatar} />
 
           {/* section details*/}
           <View style={Styles.details}>
             <View style={Styles.detailsTop}>
               {/* section title*/}
               <Text numberOfLines={1} style={Styles.detailsTopTitle}>
-                {recipient.userName}
+                {recipient.userName[0].toUpperCase() +
+                  recipient.userName.slice(1)}
               </Text>
 
               {/* section time stamp*/}

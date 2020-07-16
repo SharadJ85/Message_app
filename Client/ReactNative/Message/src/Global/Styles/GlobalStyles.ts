@@ -1,15 +1,16 @@
 const colors = {
   white: '#FFF',
+  whiteSixtyFive: '#FFFFFFA6',
   athensGray: '#EEF0F3',
   gainsboro: '#E5E5E5',
-  whiteSixtyFive: '#FFFFFFA6',
-  shipCoveThirtyFive: '#767CAD59',
-  arsenicForty: '#363A4466',
-  arsenicEighty: '#363A44CC',
-  arsenic: '#363A44',
-  black: '#000000',
+  blackThirty: '#00000033',
   blackFifty: '#00000080',
   blackSixtyFive: '#000000A6',
+  black: '#000000',
+  arsenic: '#363A44',
+  arsenicForty: '#363A4466',
+  arsenicEighty: '#363A44CC',
+  shipCoveThirtyFive: '#767CAD59',
   cornflowerBlue: '#69A3E7',
   IslamicGreen: '#109e00',
   red: '#EF0606',
@@ -83,6 +84,20 @@ const GlobalStyles = {
   },
   IconUncheck: {
     color: colors.red,
+  },
+  Message: {
+    color: colors.white,
+    backgroundColor: colors.arsenic,
+    borderColor: colors.blackThirty,
+  },
+  MessageInput: {
+    color: colors.arsenic,
+  },
+  MessageInputPlaceHolder: {
+    color: colors.arsenicForty,
+  },
+  MessageTimestamp: {
+    color: colors.blackFifty,
   },
 };
 

@@ -3,11 +3,15 @@ import Styles from './AvatarStyles';
 import {Text, View} from 'react-native';
 import {AvatarProps} from './AvatarTypes';
 
-const Avatar = ({titleInitial}: AvatarProps) => {
+const Avatar = ({titleInitial, styles}: AvatarProps) => {
   return (
     <>
-      <View style={Styles.avatarCircle}>
-        <Text style={Styles.avatarCircleText}>{titleInitial}</Text>
+      <View style={styles}>
+        <View style={Styles.avatarCircle}>
+          <Text style={Styles.avatarCircleText}>
+            {titleInitial.toUpperCase()}
+          </Text>
+        </View>
       </View>
     </>
   );

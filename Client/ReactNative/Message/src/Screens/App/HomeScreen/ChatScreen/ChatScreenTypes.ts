@@ -4,13 +4,13 @@ import {HomeScreenStackNavProps} from '../../../../Routes/Home/HomeRouteTypes';
 import {Recipient} from '../../../../Redux/Reducers/Database/DatabaseReducerTypes';
 
 export interface MapStateToPropsReturnType {
-  ReduxStateFirebase: User;
-  ReduxStateRecipient: null | Recipient;
+  ReduxReducerFirebase: User;
+  ReduxReducerRecipient: null | Recipient;
 }
 
 export interface MapDispatchToPropsReturnType {
-  DispatchFetchRecipient: (userUid: string, recipientUid: string) => void;
-  DispatchNewMessage: (
+  ReduxDispatchFetchRecipient: (userUid: string, recipientUid: string) => void;
+  ReduxDispatchNewMessage: (
     userUid: string,
     recipientUid: string,
     message: string,

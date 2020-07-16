@@ -6,7 +6,6 @@ const Styles = StyleSheet.create({
     height: 40,
     aspectRatio: 1,
     borderRadius: 50,
-    margin: 12,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: GlobalStyles.navHeaderStyle.backgroundColor,
