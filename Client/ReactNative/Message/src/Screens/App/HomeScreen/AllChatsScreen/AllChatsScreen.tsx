@@ -40,7 +40,7 @@ const AllChatsScreen = ({
     headerTitleStyle: Styles.navHeaderTitleStyle,
     // eslint-disable-next-line react/display-name
     headerRight: () => (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Contacts')}>
         <Image
           style={Styles.navHeaderRightStyle}
           source={require('../../../../Assets/media/images/PencilVector.png')}

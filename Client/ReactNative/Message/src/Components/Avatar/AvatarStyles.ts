@@ -3,7 +3,6 @@ import GlobalStyles from '../../Global/Styles/GlobalStyles';
 
 const Styles = StyleSheet.create({
   avatarCircle: {
-    height: 40,
     aspectRatio: 1,
     borderRadius: 50,
     justifyContent: 'center',

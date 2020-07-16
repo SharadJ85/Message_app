@@ -3,6 +3,7 @@ const colors = {
   whiteSixtyFive: '#FFFFFFA6',
   athensGray: '#EEF0F3',
   gainsboro: '#E5E5E5',
+  blackTen: '#00000019',
   blackThirty: '#00000033',
   blackFifty: '#00000080',
   blackSixtyFive: '#000000A6',
@@ -98,6 +99,11 @@ const GlobalStyles = {
   },
   MessageTimestamp: {
     color: colors.blackFifty,
+  },
+  ContactsSection: {
+    color: colors.arsenic,
+    borderColor: colors.blackTen,
+    backgroundColor: colors.white,
   },
 };
 
