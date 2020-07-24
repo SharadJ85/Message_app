@@ -7,17 +7,13 @@ export interface Message {
   type: 'sent' | 'received';
 }
 
-export interface LatestMessages {
-  latest_message: Message;
-}
-
 export interface ContactDetails {
   uid: string;
   email: string;
   name: string;
 }
 
-export type AllContactsList = Array<ContactDetails & LatestMessages>;
+export type AllContactsList = Array<ContactDetails>;
 
 export interface Recipient extends ContactDetails {
   messages: Array<Message>;

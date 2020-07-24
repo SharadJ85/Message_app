@@ -17,12 +17,20 @@ const Styles = StyleSheet.create({
     padding: 12,
     height: '100%',
   },
+  data: {
+    padding: 5,
+  },
   title: {
     flex: 1,
-    padding: 5,
-    fontSize: 15,
+    fontSize: 17,
     letterSpacing: 1,
     color: GlobalStyles.ContactsSection.color,
+  },
+  dataHeader: {
+    color: GlobalStyles.ContactsSectionDataHeader.color,
+  },
+  dataDetails: {
+    color: GlobalStyles.ContactsSectionDataDetails.color,
   },
 });
 

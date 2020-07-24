@@ -76,8 +76,8 @@ const AllChatsScreen = ({
                   userId: each.uid,
                 }}
                 message={{
-                  message: each.latest_message?.message,
-                  timeStamp: each.latest_message?.timestamp?._seconds.toString(),
+                  message: 'hello',
+                  timeStamp: 'timestamp',
                 }}
                 newMessageCount={56}
               />
@@ -96,8 +96,8 @@ const AllChatsScreen = ({
                   userId: each.uid,
                 }}
                 message={{
-                  message: each.latest_message?.message,
-                  timeStamp: each.latest_message?.timestamp?._seconds.toString(),
+                  message: 'hello',
+                  timeStamp: 'timestamp',
                 }}
                 newMessageCount={56}
               />

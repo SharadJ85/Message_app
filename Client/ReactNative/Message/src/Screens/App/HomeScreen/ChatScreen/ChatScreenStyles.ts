@@ -8,6 +8,11 @@ const Styles = StyleSheet.create({
   navHeaderTitleStyle: {
     color: GlobalStyles.navHeaderTitleStyle.color,
   },
+  navHeaderStyleLeft: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 15,
+  },
   body: {
     backgroundColor: GlobalStyles.section.backgroundColor,
     height: Dimensions.get('window').height,

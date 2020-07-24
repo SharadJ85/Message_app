@@ -7,6 +7,7 @@ import {
 } from './ChatScreenTypes';
 import Styles from './ChatScreenStyles';
 import {
+  BackHandler,
   ScrollView,
   Text,
   TextInput,
@@ -37,12 +38,27 @@ const ChatScreen = ({
     headerStyle: Styles.navHeaderStyle,
     headerTitle: `${route?.params.recipient?.userName}`,
     headerTintColor: Styles.navHeaderTitleStyle.color,
+    // eslint-disable-next-line react/display-name
+    headerLeft: () => (
+      <TouchableOpacity
+        // eslint-disable-next-line react/prop-types
+        onPress={() => navigation.navigate('AllChatsList')}
+        style={Styles.navHeaderStyleLeft}>
+        <MaterialIcon
+          name={'arrow-back'}
+          size={28}
+          color={Styles.navHeaderTitleStyle.color}
+        />
+      </TouchableOpacity>
+    ),
   });
+
   const [showAttachments, setShowAttachments] = useState<boolean>(false);
   const [messageSendViewHeight, setMessageSendViewHeight] = useState<number>(0);
   const [currentMessage, setCurrentMessage] = useState<string>('');
   const [sendMessageHeight, setSendMessageHeight] = useState<number>(0);
   const chatScreenScrollViewRef = useRef(null);
+
   const onMessageSubmit = () => {
     const timestamp = 1594435500;
     if (currentMessage !== '') {

@@ -4,7 +4,7 @@ const colors = {
   athensGray: '#EEF0F3',
   gainsboro: '#E5E5E5',
   blackTen: '#00000019',
-  blackThirty: '#00000033',
+  blackThirty: '#0000004D',
   blackFifty: '#00000080',
   blackSixtyFive: '#000000A6',
   black: '#000000',
@@ -104,6 +104,24 @@ const GlobalStyles = {
     color: colors.arsenic,
     borderColor: colors.blackTen,
     backgroundColor: colors.white,
+  },
+  ContactsSectionDataHeader: {
+    color: colors.arsenicEighty,
+  },
+  ContactsSectionDataDetails: {
+    color: colors.blackThirty,
+  },
+  ContactModal: {
+    backgroundColor: colors.arsenic,
+    color: colors.white,
+  },
+  ContactModalInput: {
+    backgroundColor: colors.gainsboro,
+    color: colors.arsenic,
+  },
+  ContactModalButton: {
+    backgroundColor: colors.cornflowerBlue,
+    color: colors.gainsboro,
   },
 };
 
