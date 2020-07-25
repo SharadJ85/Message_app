@@ -7,7 +7,6 @@ import {
 } from './ChatScreenTypes';
 import Styles from './ChatScreenStyles';
 import {
-  BackHandler,
   ScrollView,
   Text,
   TextInput,
@@ -18,21 +17,20 @@ import {socket} from '../HomeScreen';
 import {AppState} from '../../../../Redux/Reducers';
 import {connect} from 'react-redux';
 import {Action} from 'redux';
-import {firestoreRecipientMessages} from '../../../../Redux/Services/Database/FirestoreRecipientMessages';
 import {firestoreNewMessage} from '../../../../Redux/Services/Database/FirestoreNewMessage';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppAction} from '../../../../Redux/Actions/AppActionTypes';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from '../../../../Components/Avatar/Avatar';
 import MessageAttachments from '../../../../Components/MessageAttachments/MessageAttachments';
+import {ContactDetails} from '../../../../Redux/Reducers/Database/DatabaseReducerTypes';
 
 const ChatScreen = ({
   navigation,
   route,
   ReduxDispatchNewMessage,
-  ReduxDispatchFetchRecipient,
   ReduxReducerFirebase,
-  ReduxReducerRecipient,
+  ReduxStateList,
 }: ChatScreenPropsTypes) => {
   navigation.setOptions({
     headerStyle: Styles.navHeaderStyle,
@@ -54,8 +52,11 @@ const ChatScreen = ({
   });
 
   const [showAttachments, setShowAttachments] = useState<boolean>(false);
-  const [messageSendViewHeight, setMessageSendViewHeight] = useState<number>(0);
   const [currentMessage, setCurrentMessage] = useState<string>('');
+  const [messageSendViewHeight, setMessageSendViewHeight] = useState<number>(0);
+  const [contactDetails, setContactDetails] = useState<
+    ContactDetails | undefined
+  >([]);
   const [sendMessageHeight, setSendMessageHeight] = useState<number>(0);
   const chatScreenScrollViewRef = useRef(null);
 
@@ -64,14 +65,14 @@ const ChatScreen = ({
     if (currentMessage !== '') {
       socket.emit('APP:new-message', {
         userFirebaseID: ReduxReducerFirebase.uid,
-        recipientFirebaseID: '123xyz',
+        recipientFirebaseID: route?.params.recipient?.userId,
         timeStamp: timestamp.toString(),
         message: currentMessage,
         // message: currentMessage.replace(/\s/g, ` `),
       });
       ReduxDispatchNewMessage(
         ReduxReducerFirebase.uid,
-        route.params.recipient.userId,
+        route?.params.recipient?.userId,
         currentMessage,
         // currentMessage.replace(/\s/g, ` `),
         timestamp,
@@ -80,6 +81,7 @@ const ChatScreen = ({
       setCurrentMessage('');
     }
   };
+
   const receiveMessages = () => {
     socket.on('SERVER:new-message', (fromServer: FromServerTypes) => {
       if (fromServer.userFirebaseID === ReduxReducerFirebase.uid) {
@@ -96,11 +98,16 @@ const ChatScreen = ({
 
   useEffect(() => {
     receiveMessages();
-    ReduxDispatchFetchRecipient(
-      ReduxReducerFirebase.uid,
-      route.params.recipient.userId,
+    // ReduxDispatchFetchRecipient(
+    //   ReduxReducerFirebase.uid,
+    //   route?.params.recipient.userId,
+    // );
+    setContactDetails(
+      ReduxStateList?.filter(
+        (contact) => contact.uid === route?.params.recipient.userId,
+      )[0],
     );
-  }, [ReduxReducerRecipient?.messages]);
+  }, []);
 
   return (
     <>
@@ -111,54 +118,44 @@ const ChatScreen = ({
             setSendMessageHeight(layout.nativeEvent.layout.height);
           }}
           style={[Styles.scrollView, {marginBottom: messageSendViewHeight}]}>
-          {ReduxReducerRecipient?.uid === route?.params.recipient.userId
-            ? ReduxReducerRecipient?.messages.map((each, index) => (
-                <View key={index} style={{margin: 8}}>
-                  {each.type === 'sent' ? (
-                    <View>
-                      <Text style={Styles.messageTimestamp}>
-                        {each.timestamp._seconds}
-                      </Text>
-                      <View
-                        style={[
-                          Styles.messageSection,
-                          {alignSelf: 'flex-end'},
-                        ]}>
-                        <View style={Styles.messageSectionMessage}>
-                          <Text style={Styles.messageSectionMessageText}>
-                            {each.message}
-                          </Text>
-                        </View>
-                      </View>
-                      <Text style={Styles.messageDelivered}>
-                        {index % 2 === 0 ? 'Delivered' : ''}
+          {contactDetails?.messages?.map((each, index) => (
+            <View key={index} style={{margin: 8}}>
+              {each.type === 'sent' ? (
+                <View>
+                  <Text style={Styles.messageTimestamp}>
+                    {each.timestamp._seconds}
+                  </Text>
+                  <View
+                    style={[Styles.messageSection, {alignSelf: 'flex-end'}]}>
+                    <View style={Styles.messageSectionMessage}>
+                      <Text style={Styles.messageSectionMessageText}>
+                        {each.message}
                       </Text>
                     </View>
-                  ) : (
-                    <View>
-                      <Text style={Styles.messageTimestamp}>
-                        {each.timestamp._seconds}
-                      </Text>
-                      <View
-                        style={[
-                          Styles.messageSection,
-                          {alignSelf: 'flex-start'},
-                        ]}>
-                        <Avatar
-                          titleInitial={route?.params.recipient?.userName[0]}
-                          styles={Styles.messageSectionAvatar}
-                        />
-                        <View style={Styles.messageSectionMessage}>
-                          <Text style={Styles.messageSectionMessageText}>
-                            {each.message}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  )}
+                  </View>
+                  <Text style={Styles.messageDelivered}>Delivered</Text>
                 </View>
-              ))
-            : null}
+              ) : (
+                <View>
+                  <Text style={Styles.messageTimestamp}>
+                    {each.timestamp._seconds}
+                  </Text>
+                  <View
+                    style={[Styles.messageSection, {alignSelf: 'flex-start'}]}>
+                    <Avatar
+                      titleInitial={route?.params.recipient?.userName[0]}
+                      styles={Styles.messageSectionAvatar}
+                    />
+                    <View style={Styles.messageSectionMessage}>
+                      <Text style={Styles.messageSectionMessageText}>
+                        {each.message}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+            </View>
+          ))}
         </ScrollView>
         <View
           onLayout={(event) => {
@@ -211,8 +208,6 @@ const mapDispatchToProps = (
   ownProps: ChatScreenPropsTypes,
 ): MapDispatchToPropsReturnType => {
   return {
-    ReduxDispatchFetchRecipient: (userUid, recipientUid) =>
-      dispatch(firestoreRecipientMessages(userUid, recipientUid)),
     ReduxDispatchNewMessage: (
       userUid,
       recipientUid,
@@ -231,7 +226,7 @@ const mapStateToProps = (
 ): MapStateToPropsReturnType => {
   return {
     ReduxReducerFirebase: state.Auth.user.firebaseData,
-    ReduxReducerRecipient: state.Firestore.recipient.recipient,
+    ReduxStateList: state.Firestore.allContactsList.list,
   };
 };
 

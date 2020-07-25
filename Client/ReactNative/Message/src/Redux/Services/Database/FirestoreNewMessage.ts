@@ -5,10 +5,6 @@ import {
   receiveNewMessage,
   requestNewMessage,
 } from '../../Actions/Database/NewMessageAction';
-import {
-  ContactDetails,
-  LatestMessages,
-} from '../../Reducers/Database/DatabaseReducerTypes';
 
 export const firestoreNewMessage = (
   userID: string,
@@ -22,7 +18,7 @@ export const firestoreNewMessage = (
     .collection('users')
     .doc('f6Aa2YDescDwvUGWfi3N')
     .collection('contacts')
-    .doc('51251wKCcvemUnzqyT7U')
+    .doc(recipientID)
     .update({
       messages: firestore.FieldValue.arrayUnion({
         message: message,

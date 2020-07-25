@@ -1,15 +1,14 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import User = FirebaseAuthTypes.User;
 import {HomeScreenStackNavProps} from '../../../../Routes/Home/HomeRouteTypes';
-import {Recipient} from '../../../../Redux/Reducers/Database/DatabaseReducerTypes';
+import {AllContactsList} from '../../../../Redux/Reducers/Database/DatabaseReducerTypes';
 
 export interface MapStateToPropsReturnType {
   ReduxReducerFirebase: User;
-  ReduxReducerRecipient: null | Recipient;
+  ReduxStateList: null | AllContactsList;
 }
 
 export interface MapDispatchToPropsReturnType {
-  ReduxDispatchFetchRecipient: (userUid: string, recipientUid: string) => void;
   ReduxDispatchNewMessage: (
     userUid: string,
     recipientUid: string,

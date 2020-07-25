@@ -76,7 +76,7 @@ const AllChatsScreen = ({
                   userId: each.uid,
                 }}
                 message={{
-                  message: 'hello',
+                  message: each.messages.reverse()[0].message,
                   timeStamp: 'timestamp',
                 }}
                 newMessageCount={56}
@@ -96,7 +96,7 @@ const AllChatsScreen = ({
                   userId: each.uid,
                 }}
                 message={{
-                  message: 'hello',
+                  message: each.messages.reverse()[0].message,
                   timeStamp: 'timestamp',
                 }}
                 newMessageCount={56}

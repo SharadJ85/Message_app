@@ -8,11 +8,6 @@ import {
   NEWUSER_SUCCESS,
   NEWUSER_FAILURE,
 } from './NewUserAction';
-import {
-  RECIPIENTMESSAGES_REQUEST,
-  RECIPIENTMESSAGES_SUCCESS,
-  RECIPIENTMESSAGES_FAILURE,
-} from './RecipientMessagesAction';
 import {AllContactsList} from '../../Reducers/Database/DatabaseReducerTypes';
 import {
   NEWMESSAGE_FAILURE,
@@ -59,26 +54,6 @@ export type NewUserActions =
   | ReceiveNewUserType
   | NewUserErrorType;
 
-// Recipient Messages Actions
-export interface RequestRecipientMessagesType {
-  type: typeof RECIPIENTMESSAGES_REQUEST;
-}
-
-export interface ReceiveRecipientMessagesType {
-  type: typeof RECIPIENTMESSAGES_SUCCESS;
-  payload: any;
-}
-
-export interface RecipientMessagesErrorType {
-  type: typeof RECIPIENTMESSAGES_FAILURE;
-  payload: any;
-}
-
-export type RecipientMessagesActions =
-  | RequestRecipientMessagesType
-  | ReceiveRecipientMessagesType
-  | RecipientMessagesErrorType;
-
 // New Message Actions
 export interface RequestNewMessageType {
   type: typeof NEWMESSAGE_REQUEST;
@@ -102,5 +77,4 @@ export type NewMessageActions =
 export type DatabaseActions =
   | AllContactsListActions
   | NewUserActions
-  | RecipientMessagesActions
   | NewMessageActions;

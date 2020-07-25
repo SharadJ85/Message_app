@@ -13,12 +13,6 @@ export const initialState: DatabaseState = {
     newUserError: false,
     error: null,
   },
-  recipient: {
-    isRequesting: false,
-    recipientMessagesError: false,
-    error: null,
-    recipient: null,
-  },
 };
 
 const DatabaseReducer = (
@@ -78,35 +72,6 @@ const DatabaseReducer = (
         newUser: {
           isRequesting: false,
           newUserError: true,
-          error: action.payload,
-        },
-      };
-    case 'RECIPIENTMESSAGES_REQUEST':
-      return {
-        ...state,
-        recipient: {
-          ...state.recipient,
-          isRequesting: true,
-          recipientMessagesError: false,
-          error: null,
-        },
-      };
-    case 'RECIPIENTMESSAGES_SUCCESS':
-      return {
-        ...state,
-        recipient: {
-          ...state.recipient,
-          isRequesting: false,
-          recipient: action.payload,
-        },
-      };
-    case 'RECIPIENTMESSAGES_FAILURE':
-      return {
-        ...state,
-        recipient: {
-          ...state.recipient,
-          isRequesting: false,
-          recipientMessagesError: true,
           error: action.payload,
         },
       };

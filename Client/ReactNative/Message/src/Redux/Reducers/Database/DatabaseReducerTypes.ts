@@ -8,16 +8,13 @@ export interface Message {
 }
 
 export interface ContactDetails {
+  messages: Array<Message>;
   uid: string;
   email: string;
   name: string;
 }
 
 export type AllContactsList = Array<ContactDetails>;
-
-export interface Recipient extends ContactDetails {
-  messages: Array<Message>;
-}
 
 export interface DatabaseState {
   allContactsList: {
@@ -30,11 +27,5 @@ export interface DatabaseState {
     isRequesting: boolean;
     newUserError: boolean;
     error: null | {};
-  };
-  recipient: {
-    isRequesting: boolean;
-    recipientMessagesError: boolean;
-    error: null | {};
-    recipient: null | Recipient;
   };
 }
